@@ -16,7 +16,7 @@ export default function AddToCart({ product }: Props) {
       discount: product.discount || product.price,
       id: product.id,
       name: product.name || product.title,
-      image: product.image,
+      image: Array.isArray(product.image) ? product.image[0] : product.image,
       price: product.oldPrice || product.price,
       rating: product.rating || 0,
       specs: product.specs,

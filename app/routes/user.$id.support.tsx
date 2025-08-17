@@ -1,6 +1,13 @@
-import { ActionFunctionArgs, redirect } from "@remix-run/node";
+import { ActionFunctionArgs, MetaFunction, redirect } from "@remix-run/node";
 import { sendSupportMessage, setUserSupportChat, tokenVerifier } from "~/utils";
 import Support from "~/components/User/Support/Support";
+
+export const meta: MetaFunction = () => {
+  return [
+    { title: "SUPPORT / EXKO" },
+    { name: "EXKO support", content: "Welcome to EXKO!" },
+  ];
+};
 
 export const action = async ({ request, params }: ActionFunctionArgs) => {
   const { id } = params;

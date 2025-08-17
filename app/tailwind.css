@@ -2,6 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+@theme {
+  --breakpoint-middle: 62rem;
+}
 
 :root {
   --bg-font-all: 18px;
@@ -26,7 +29,7 @@ html {
   scroll-behavior: smooth;
 }
 
-body{
+body {
   width: 100%;
   height: 100vh;
 }
@@ -45,7 +48,7 @@ body{
   rotate: -45deg;
 }
 
-.header-catalog-container > div{
+.header-catalog-container > div {
   animation: catalogOpen 0.5s ease;
 }
 
@@ -56,12 +59,7 @@ body{
   left: -150px;
   width: 100%;
   height: 100%;
-  background: linear-gradient(
-    90deg,
-    transparent ,
-    white ,
-    transparent
-  );
+  background: linear-gradient(90deg, transparent, white, transparent);
   animation: shimmer 1.5s infinite alternate;
   z-index: 1;
   pointer-events: none;
@@ -77,9 +75,132 @@ body{
   color: white !important;
 }
 
+.viewer > .swiper > .swiper-button-next,
+.viewer > .swiper > .swiper-button-prev {
+  color: black !important;
+}
+
+.viewer > .swiper > .swiper-button-next::before,
+.viewer > .swiper > .swiper-button-prev::before {
+  content: " ";
+  position: absolute;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  filter: blur(8px);
+}
+
 .support-btn-loader,
-.auth-loader{
+.auth-loader {
   animation: supportLoader 1.5s linear infinite;
+}
+
+/* MOBILE HEADER */
+
+.mobile-navigation {
+  width: 100%;
+  margin: 0 auto;
+}
+
+.navigation-bar {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: white;
+  border-radius: 9999px;
+  height: 56px;
+  padding: 0 5px;
+  position: relative;
+}
+
+.nav-itemm {
+  background: transparent;
+  border: none;
+  color: #555555;
+  cursor: pointer;
+  flex: 1;
+  height: 100%;
+  padding: 0;
+  margin: 5px 0;
+  position: relative;
+  transition: all 0.3s ease;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-content {
+  align-items: center;
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  position: relative;
+  width: 100%;
+}
+
+.nav-icon {
+  height: 20px;
+  width: 20px;
+  transition: all 0.3s ease;
+}
+
+.nav-label {
+  font-size: 14px;
+  font-weight: 500;
+  margin-left: 8px;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+  color: white;
+  display: inline-block;
+}
+
+.nav-itemm.active {
+  background-color: black;
+  border-radius: 9999px;
+  height: 90%;
+}
+
+.nav-itemm.active .nav-icon {
+  color: white;
+}
+
+.nav-itemm.active .nav-content {
+  padding: 0 16px;
+}
+
+.nav-itemm.active {
+  animation: expand 0.3s forwards;
+}
+
+/* Animation for the active tab */
+.nav-itemm.active {
+  animation: expand 0.3s forwards;
+}
+
+@keyframes expand {
+  0% {
+    flex: 1;
+  }
+  100% {
+    flex: 2;
+  }
+}
+
+/* Animation for inactive tabs */
+.nav-itemm:not(.active) {
+  animation: shrink 0.3s forwards;
+}
+
+@keyframes shrink {
+  0% {
+    flex: 2;
+  }
+  100% {
+    flex: 1;
+  }
 }
 
 /* animations */
@@ -123,5 +244,23 @@ body{
   }
   to {
     rotate: 360deg;
+  }
+}
+
+@keyframes comeout {
+  from {
+    margin: -2rem 0 0 0;
+    opacity: 0;
+  }
+  to {
+    margin: 1rem 0;
+    opacity: 1;
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .swiper-button-next,
+  .swiper-button-prev {
+    display: none !important;
   }
 }

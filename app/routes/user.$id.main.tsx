@@ -1,7 +1,14 @@
-import { ActionFunctionArgs, LoaderFunctionArgs } from "@remix-run/node";
+import { ActionFunctionArgs, LoaderFunctionArgs, MetaFunction } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import UserInfo from "~/components/User/Info/UserInfo";
 import { changeData, changeUserData, getUserData } from "~/utils";
+
+export const meta: MetaFunction = () => {
+  return [
+    { title: "ME / EXKO" },
+    { name: "MY EXKO PROFILE", content: "Welcome to EXKO!" },
+  ];
+};
 
 export const loader = async ({ params }: LoaderFunctionArgs) => {
   const { id } = params;

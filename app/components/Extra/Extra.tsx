@@ -1,3 +1,5 @@
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "~/firebase";
 import { manualTimestamp, Product } from "~/utils";
 
 export const isString = (value: unknown) => typeof value === "string";
@@ -90,4 +92,35 @@ export const formatDate = (unformatted: manualTimestamp | undefined, day?: undef
   });
 
   return day ? `${date}` : `${date}  ${time}`;
+};
+
+export const getToken = (): Promise<string | null> => {
+  return new Promise((resolve)=>{
+    onAuthStateChanged(auth, async (user) => {
+      if(user){
+        const token = await user.getIdToken();
+        resolve(token)
+      }else{
+        resolve(null)
+      }
+    })
+  })
+}
+
+export const autoPicture = async () => {
+  const randomNumber = Math.floor(Math.random() * 8) + 1;
+
+  const images = [
+    { image: () => import("../../assets/avatar/avatar1.png") },
+    { image: () => import("../../assets/avatar/avatar2.png") },
+    { image: () => import("../../assets/avatar/avatar3.png") },
+    { image: () => import("../../assets/avatar/avatar4.png") },
+    { image: () => import("../../assets/avatar/avatar5.png") },
+    { image: () => import("../../assets/avatar/avatar6.png") },
+    { image: () => import("../../assets/avatar/avatar7.png") },
+    { image: () => import("../../assets/avatar/avatar8.png") },
+  ];
+
+  const image = await images?.[randomNumber].image().then(promise => promise.default); 
+  return image;
 };

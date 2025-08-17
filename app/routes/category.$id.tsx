@@ -1,11 +1,15 @@
-import { LoaderFunctionArgs } from "@remix-run/node";
-import { data, useLoaderData } from "@remix-run/react";
+// import { LoaderFunctionArgs } from "@remix-run/node";
+import {
+  ClientLoaderFunctionArgs,
+  data,
+  useLoaderData,
+} from "@remix-run/react";
 import { useSelector } from "react-redux";
 import { RootState } from "~/root";
 import { Product } from "~/utils";
 import Collection from "~/components/Home/Collection";
 
-export const loader = ({ params }: LoaderFunctionArgs) => {
+export const clientLoader = async ({ params }: ClientLoaderFunctionArgs) => {
   const { id } = params;
 
   const category = [
@@ -60,17 +64,19 @@ export const loader = ({ params }: LoaderFunctionArgs) => {
   return { foundCategory };
 };
 
-
 export default function Category() {
-  const products = useSelector((state: RootState) => state.cart.products) as Product[] | null;
-  const { foundCategory } = useLoaderData<typeof loader>();
+  const products = useSelector((state: RootState) => state.cart.products) as
+    | Product[]
+    | null;
+  const { foundCategory } = useLoaderData<typeof clientLoader>();
 
   return (
     <div className="home-page w-[90%] mx-[auto]">
       <Collection
         all={
           products?.filter(
-            (sortingItems: Product) => foundCategory?.category === sortingItems.proType
+            (sortingItems: Product) =>
+              foundCategory?.category === sortingItems.proType
           ) || null
         }
         section={

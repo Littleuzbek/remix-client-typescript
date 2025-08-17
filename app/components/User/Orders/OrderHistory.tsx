@@ -10,19 +10,19 @@ export default function OrderHistory({
   const [category, setCategory] = useState(true);
 
   return (
-    <div className="h-fit pb-[1rem] overflow-hidden border-3 border-[var(--first-color)] rounded-[20px]">
+    <div className="h-fit pb-[1rem] overflow-hidden border-0 middle:border-3 border-[var(--first-color)] rounded-[20px]">
       <div className="mb-[1rem] grid grid-cols-2">
         <button
-          className={`text-center py-[1rem]  border-0 border-b-3 border-[var(--first-color)] cursor-pointer rounded-br-[10px] text-[18px] bg-transparent ${
-            category ? "!bg-[var(--first-color)] text-[white]" : ""
+          className={`text-center py-[1rem]  border-0 border-b-3 border-[var(--first-color)] cursor-pointer rounded-br-[10px] text-[18px] bg-transparent text-[black] ${
+            category ? "!bg-[var(--first-color)] !text-[white]" : ""
           }`}
           onClick={() => setCategory(true)}
         >
           Faol
         </button>
         <button
-          className={`text-center py-[1rem] border-0 border-b-3 border-[var(--first-color)] border-x-none cursor-pointer rounded-bl-[10px] text-[18px] bg-transparent ${
-            category ? "" : "!bg-[var(--first-color)] text-[white]"
+          className={`text-center py-[1rem] border-0 border-b-3 border-[var(--first-color)] border-x-none cursor-pointer rounded-bl-[10px] text-[18px] bg-transparent text-[black] ${
+            category ? "" : "!bg-[var(--first-color)] !text-[white]"
           }`}
           onClick={() => setCategory(false)}
         >
@@ -39,8 +39,12 @@ export default function OrderHistory({
           )
           ?.map((item, index) =>
             category ? (
-              ((item?.confirmed === null && item?.orderCondition === null) ||
-                item?.nasiyaCondition === null) && (
+              // if order installments has been not paid all
+              item?.nasiyaCondition !== true &&
+              // if order wasn't cancelled
+              item?.nasiyaCondition !== false &&
+              item?.orderCondition !== false &&
+              item?.confirmed !== false && (
                 <Order order={item} key={item?.orderId + index + "tuya"} />
               )
             ) : (

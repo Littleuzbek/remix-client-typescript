@@ -1,12 +1,13 @@
-import { Product } from "~/utils";
-import Options from "./ShoppingDetails/Options";
-import { useNavigate } from "@remix-run/react";
-import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
-// import { RootState } from "~/root";
-import AmountHandler from "./ShoppingDetails/AmountHandler";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "@remix-run/react";
+import { CartItem, Product } from "~/utils";
 import { PriceFormatter } from "../Extra/Extra";
 import { cartAction } from "~/store/CartSlice";
+import { RootState } from "~/root";
+import { FaShoppingCart } from "react-icons/fa";
+import AmountHandler from "./ShoppingDetails/AmountHandler";
+import Options from "./ShoppingDetails/Options";
 
 export default function ShoppingDetails({
   productDetails,
@@ -16,12 +17,12 @@ export default function ShoppingDetails({
   const [quantity, setQuantity] = useState<number>(1);
   const [activeColor, setActiveColor] = useState<null | string>(null);
   const [activeSize, setActiveSize] = useState<null | string>(null);
-  // const cart = useSelector((state: RootState) => state.cart.cart) as Product[];
-  // const inCart =
-  //   cart?.filter((product) => product.id === productDetails.id)?.length === 0;
-  // const quantityForMobile = cart?.filter(
-  //   (product) => product?.id === productDetails?.id
-  // )[0]?.quantity;
+  const cart = useSelector((state: RootState) => state.cart.cart) as CartItem[];
+  const inCart =
+    cart?.filter((product) => product.id === productDetails.id)?.length === 0;
+  const quantityForMobile = cart?.filter(
+    (product) => product?.id === productDetails?.id
+  )[0]?.quantity;
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -35,7 +36,7 @@ export default function ShoppingDetails({
     }
   };
 
-  const addToCart = () => {
+  const addToCart = (): void => {
     const addingItem = {
       discount: productDetails.discount || productDetails.price,
       id: productDetails.id,
@@ -64,7 +65,7 @@ export default function ShoppingDetails({
   };
 
   return (
-    <div className="w-[40rem]">
+    <div className="w-full middle:w-[40rem]">
       <div className="w-full">
         <p className="text-[1.5rem] my-[.5rem]">
           {productDetails?.name || productDetails?.title || "NO NAME PRODUCT"}
@@ -93,11 +94,11 @@ export default function ShoppingDetails({
         />
         <AmountHandler quantity={quantity} onAmountHandler={amountHandler} />
       </div>
-      <div className="w-full my-[.5rem]">
+      <div className="hidden middle:block w-full my-[.5rem]">
         {/* <p>{translateText().price}:</p> */}
         <p className="text-[1rem] font-[500]">Narx:</p>
         <div className="flex items-center gap-[1rem] my-[.5rem]">
-          <p className="text-[1.5rem] font-[6400]">
+          <p className="text-[1.5rem] font-[600]">
             {PriceFormatter(
               (productDetails?.discount || productDetails?.price) * quantity
             )}{" "}
@@ -112,7 +113,7 @@ export default function ShoppingDetails({
           </s>
         </div>
       </div>
-      <p className="mt-[2rem] px-[1rem] h-[2.5rem] rounded-[10px] bg-[var(--credit-background)] text-[.9rem] flex items-center gap-[.3rem] duration-300 cursor-pointer ">
+      <p className="mt-[1rem] middle:mt-[2rem] px-[1rem] h-[2.5rem] rounded-[10px] bg-[var(--credit-background)] text-[.9rem] flex items-center gap-[.3rem] duration-300 cursor-pointer ">
         <span className="bg-[var(--credit-number-background)] rounded-[20px] py-[3px] px-[5px] mr-[10px]">
           Oyiga{" "}
           {PriceFormatter(
@@ -122,7 +123,7 @@ export default function ShoppingDetails({
         </span>
         12 oy muddatli to&apos;lov
       </p>
-      <div className="w-full h-[3rem] flex items-center justify-evenly my-[1rem]">
+      <div className="hidden middle:flex w-full h-[3rem] items-center justify-evenly my-[1rem]">
         <button
           className="w-[45%] h-full text-[1.15rem] rounded-[10px] border-none bg-[var(--first-color)] cursor-pointer duration-300 text-[white] hover:bg-[var(--first-color-light)]"
           onClick={() => {
@@ -149,35 +150,35 @@ export default function ShoppingDetails({
         <p className="text-[1rem]">{productDetails?.specs}</p>
       </div>
 
-      {/* <div className="">
+      <div className="middle:hidden w-full h-[4rem] bg-[white] fixed bottom-[0] left-[0] flex justify-between items-center px-[.5rem] z-2">
         <div>
-          <p>
+          <p className="text-[1.2rem] font-[550]">
             {PriceFormatter(
-              productDetails?.discount * (quantityForMobile || 1)
+              (productDetails?.discount || 0) * (quantityForMobile || 1)
             )}{" "}
-            so'm
+            so&apos;m
           </p>
           {quantityForMobile && <p>quantity: {quantityForMobile}</p>}
-          {quantityForMobile > !1 || (
+          {quantityForMobile !>= 1 || (
             <s>
               {PriceFormatter(productDetails?.price * (quantityForMobile || 1))}{" "}
-              so'm
+              so&apos;m
             </s>
           )}
         </div>
         {inCart || (
-          <button className={classes.addMore} onClick={() => addToCart()}>
+          <button className="bg-[var(--first-color)] border-none py-[.7rem] px-[1rem] text-[white] rounded-[10px]" onClick={() => addToCart()}>
             + 1
           </button>
         )}
-        {inCart && <button onClick={() => addToCart()}>Savatga</button>}
+        {inCart && <button className="bg-[var(--first-color)] border-none py-[.7rem] px-[2rem] mr-[.5rem] text-[white] text-[1rem] rounded-[10px]" onClick={() => addToCart()}>Savatga</button>}
         {inCart || (
-          <Link to={"/cart"} className={classes.toCartPage}>
+          <Link to={"/cart"} className="border-1 border-[var(--first-color)] py-[.6rem] px-[1rem] mr-[.5rem] text-[var(--first-color)] rounded-[10px] font-[550] no-underline flex items-center gap-[.5rem]">
             <FaShoppingCart />
-            O'tish
+            O&apos;tish
           </Link>
         )}
-      </div> */}
+      </div>
     </div>
   );
 }

@@ -1,36 +1,44 @@
-import { useActionData, useFetcher, useLocation } from "@remix-run/react";
-import { onAuthStateChanged } from "firebase/auth";
+import { redirect, redirectDocument, useActionData, useFetcher, useLocation } from "@remix-run/react";
 import { useEffect, useState } from "react";
 import OrderHistory from "~/components/User/Orders/OrderHistory";
-import { auth } from "~/firebase";
-import { getUserOrders, OrderProps } from "../utils";
-import { ActionFunctionArgs } from "@remix-run/node";
+import { cancelOrder, getUserOrders, OrderProps, tokenVerifier } from "../utils";
+import { ActionFunctionArgs, MetaFunction } from "@remix-run/node";
+import { getToken } from "~/components/Extra/Extra";
+
+export const meta: MetaFunction = () => {
+  return [
+    { title: "MY ORDERS / EXKO" },
+    { name: "EXKO orders", content: "Welcome to EXKO!" },
+  ];
+};
 
 export const action = async ({ request, params }: ActionFunctionArgs) => {
   const { id } = params;
   const formData = await request.formData();
-  // const idToken = formData.get("idToken");
+  const idToken = formData.get("idToken") as string;
   const actionType = formData.get("orderType");
-  // const isOrderType = formData.get("typ");
-  // const isOrder = formData.get("ord");
-  // const orderType = JSON.parse(isOrderType);
-  // const order = JSON.parse(isOrder);
+  const orderType = formData.get("typ") as string;
+  const isOrder = formData.get("ord") as string;
+  const order = JSON.parse(isOrder);
 
-  // const tokenUid = await tokenVerifier(idToken);
+  if(id === "undefined") return redirect(`/authentication`);
 
-  // if (id && tokenUid !== id) return redirect(`/authentication`);
+  const tokenUid = await tokenVerifier(idToken);
 
-  if (actionType === "read") return await getUserOrders(id as string);
+  if (tokenUid !== id) return redirect(`/authentication`);
 
-  // if (actionType === "action") {
-  //   try {
-  //     await cancelOrder(orderType, order.orderId, id);
+  if (actionType === "read") return await getUserOrders(id);
 
-  //     return redirectDocument(request.url);
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // }
+  if (actionType === "action" && order?.orderId) {
+    try {
+      const isNasiya = orderType === "true";
+      await cancelOrder(isNasiya, order.orderId, id);
+
+      return redirectDocument(request.url);
+    } catch (err) {
+      console.log(err);
+    }
+  }
 
   return true;
 };
@@ -42,17 +50,16 @@ export default function Orders() {
   const data = useActionData<typeof action>();
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, async (user) => {
-      if (user) {
-        const token = await user.getIdToken();
-        fetcher.submit(
-          { idToken: token, orderType: "read" },
-          { method: "post", action: pathname }
-        );
-      }
-    });
+    const fetchOrders = async (): Promise<void> => {
+      const token = await getToken();
 
-    return () => unsubscribe();
+      fetcher.submit(
+        { idToken: token, orderType: "read" },
+        { method: "post", action: pathname }
+      );
+    }
+    
+    fetchOrders();
     // eslint-disable-next-line
   }, []);
 

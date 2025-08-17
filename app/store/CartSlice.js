@@ -8,15 +8,15 @@ const CartSlice = createSlice({
     totalProduct: 0,
     totalDiscount: 0,
     totalPrice: 0,
-    onlyBuy: false,
+    onlyBuy: null,
     wishes: [],
     results: [],
     edittedImage: [],
 
     // ui and auth properties
     isLogged: false,
-    user: false,
-    notificationItem: false,
+    user: null,
+    notificationItem: null,
     viewer: false,
   },
   reducers: {
@@ -51,8 +51,8 @@ const CartSlice = createSlice({
             ? action.payload.discount * (action.payload.quantity || 1)
             : Number(action.payload.discount.replaceAll(" ", "")) *
               (action.payload.quantity || 1),
-        color: action.payload.color || "",
-        size: action.payload.size || "",
+        color: action.payload.color || null,
+        size: action.payload.size || null,
       };
 
       const existingItem = state.cart.find(
@@ -151,6 +151,7 @@ const CartSlice = createSlice({
       state.cart = [];
       state.totalDiscount = 0;
       state.totalPrice = 0;
+      state.onlyBuy = null
     },
     setLogged(state, action) {
       state.isLogged = action.payload;

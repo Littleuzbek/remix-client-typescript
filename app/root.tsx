@@ -1,4 +1,5 @@
 import {
+  ClientLoaderFunctionArgs,
   data,
   Links,
   Meta,
@@ -10,8 +11,8 @@ import type { LinksFunction } from "@remix-run/node";
 import { Provider } from "react-redux";
 
 import "./tailwind.css";
-import { getProducts } from "./utils";
-import store from "./store/store"
+import { getProducts, Product } from "./utils";
+import store from "./store/store";
 import AppShell from "./AppShell";
 
 export const links: LinksFunction = () => [
@@ -67,10 +68,21 @@ export const loader = async () => {
     { products },
     {
       status: 200,
-      headers: { "Cache-Control": "public, max-age=86400, s-maxage=43200" },
+      headers: { "Cache-Control": "public, max-age=21600, s-maxage=21600" },
     }
   );
 };
+
+export const clientLoader = async ({ serverLoader }: ClientLoaderFunctionArgs) => {
+  const state = store.getState();
+  if (state?.cart?.products) return { products: state?.cart?.products || [] };
+
+  const loaderData = await serverLoader() as { products: Product[] };
+  const query = loaderData?.products;
+  return { products: query };
+};
+
+clientLoader.hydrate = true;
 
 export function Layout({ children }: { children: React.ReactNode }) {
   return (

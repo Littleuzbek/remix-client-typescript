@@ -32,7 +32,7 @@ export interface Product {
   oldPrice?: number;
   category?: string;
   images?: string | string[];
-  // key "price" was used as discount previously
+  // the key "price" was used as "discount" key previously but now it represents oldPrice
 }
 
 export interface manualTimestamp {
@@ -68,91 +68,106 @@ export interface changeData {
 }
 
 interface orderedProducts {
-  color?: null | string[]
-  size?: null | string[]
-  id: string
-  image: string[] | string
-  name: string
-  price: number
-  quantity: number
-  totalPrice: number
+  color?: null | string[];
+  size?: null | string[];
+  id: string;
+  image: string[] | string;
+  name: string;
+  price: number;
+  quantity: number;
+  totalPrice: number;
 }
 
 export interface nasiyaItems {
   payment1?: {
-    condition: boolean
-    date: manualTimestamp
-    sum: number
-  }
+    condition: boolean;
+    date: manualTimestamp;
+    sum: number;
+  };
   payment2?: {
-    condition: boolean
-    date: manualTimestamp
-    sum: number
-  }
+    condition: boolean;
+    date: manualTimestamp;
+    sum: number;
+  };
   payment3?: {
-    condition: boolean
-    date: manualTimestamp
-    sum: number
-  }
-   payment4?: {
-    condition: boolean
-    date: manualTimestamp
-    sum: number
-  }
-   payment5?: {
-    condition: boolean
-    date: manualTimestamp
-    sum: number
-  }
-   payment6?: {
-    condition: boolean
-    date: manualTimestamp
-    sum: number
-  }
-   payment7?: {
-    condition: boolean
-    date: manualTimestamp
-    sum: number
-  }
-   payment8?: {
-    condition: boolean
-    date: manualTimestamp
-    sum: number
-  }
-   payment9?: {
-    condition: boolean
-    date: manualTimestamp
-    sum: number
-  }
-   payment10?: {
-    condition: boolean
-    date: manualTimestamp
-    sum: number
-  }
-   payment11?: {
-    condition: boolean
-    date: manualTimestamp
-    sum: number
-  }
-   payment12?: {
-    condition: boolean
-    date: manualTimestamp
-    sum: number
-  }
+    condition: boolean;
+    date: manualTimestamp;
+    sum: number;
+  };
+  payment4?: {
+    condition: boolean;
+    date: manualTimestamp;
+    sum: number;
+  };
+  payment5?: {
+    condition: boolean;
+    date: manualTimestamp;
+    sum: number;
+  };
+  payment6?: {
+    condition: boolean;
+    date: manualTimestamp;
+    sum: number;
+  };
+  payment7?: {
+    condition: boolean;
+    date: manualTimestamp;
+    sum: number;
+  };
+  payment8?: {
+    condition: boolean;
+    date: manualTimestamp;
+    sum: number;
+  };
+  payment9?: {
+    condition: boolean;
+    date: manualTimestamp;
+    sum: number;
+  };
+  payment10?: {
+    condition: boolean;
+    date: manualTimestamp;
+    sum: number;
+  };
+  payment11?: {
+    condition: boolean;
+    date: manualTimestamp;
+    sum: number;
+  };
+  payment12?: {
+    condition: boolean;
+    date: manualTimestamp;
+    sum: number;
+  };
 }
 
 export interface OrderProps {
-  confirmed?: boolean | null
-  nasiyaCondition?: boolean | null
-  orderAdress: string
-  orderCondition: boolean | null
-  orderDate: manualTimestamp
-  orderDeliveryDate: null
-  orderId: string
-  orderOwner: UserData
-  orderTotalPrice: number
-  orderItems: orderedProducts[]
-  nasiya?: nasiyaItems | undefined | null
+  confirmed?: boolean | null | undefined;
+  nasiyaCondition?: boolean | null;
+  orderAdress: string;
+  orderCondition: boolean | null;
+  orderDate: manualTimestamp;
+  orderDeliveryDate: null;
+  orderId: string;
+  orderOwner: UserData;
+  orderTotalPrice: number;
+  orderItems: orderedProducts[];
+  nasiya?: nasiyaItems | undefined | null;
+}
+
+export interface CartItem {
+  cartItemId: string;
+  id: string;
+  discount: number;
+  price: number;
+  image: string;
+  name: string;
+  proType: string;
+  quantity: number;
+  rating: number;
+  specs: string | null;
+  color: string[] | null;
+  size: string[] | null;
 }
 
 export const getProducts = async (): Promise<Product[] | null> => {
@@ -190,19 +205,35 @@ export const getUserOrders = async (userId: string): Promise<OrderProps[]> => {
   const { adminDb } = await getAdminServices();
 
   const ordersSnapshot = await adminDb
-      .collection("exko")
-      .doc("users")
-      .collection("users")
-      .doc(userId)
-      .collection("orders")
-      .get();
-  
-    const orders = ordersSnapshot.docs.map((doc: QueryDocumentSnapshot) => ({
-      ...doc.data(),
-    }));
+    .collection("exko")
+    .doc("users")
+    .collection("users")
+    .doc(userId)
+    .collection("orders")
+    .get();
+
+  const orders = ordersSnapshot.docs.map((doc: QueryDocumentSnapshot) => ({
+    ...doc.data(),
+  }));
 
   return orders;
-}
+};
+
+export const getUserOrder = async (userId: string, orderId: string): Promise<OrderProps | undefined> => {
+  const { adminDb } = await getAdminServices();
+
+  const order = await adminDb
+    .collection("exko")
+    .doc("users")
+    .collection("users")
+    .doc(userId)
+    .collection("orders")
+    .doc(orderId)
+    .get();
+
+
+  return order?.data();
+};
 
 const ReturnMessage = (
   condition: boolean,
@@ -248,10 +279,10 @@ export const login = async (
     } else {
       return ReturnMessage(false, "Please provide email and password");
     }
-  } catch (error: any) {
-    if (error.code === "auth/invalid-credential") {
+  } catch (err) {
+    if ((err as Error)?.message === "auth/invalid-credential") {
       return ReturnMessage(false, "email or password is wrong!");
-    } else if (error.code === "auth/too-many-requests") {
+    } else if ((err as Error)?.message === "auth/too-many-requests") {
       return ReturnMessage(false, "too many attempts");
     } else {
       return ReturnMessage(false, "Please try again later");
@@ -298,8 +329,8 @@ export const signUp = async (formData: FormData) => {
 export const tokenVerifier = async (
   idToken: string
 ): Promise<string | null> => {
-  if (!idToken) {
-    throw new Error("No token provided");
+  if (idToken.trim() === "") {
+    return null;
   }
 
   const { adminAuth } = await getAdminServices();
@@ -371,7 +402,7 @@ export const changeUserData = async (
 
     return { success: true, updated: Object.keys(filteredData) };
   } catch (err: unknown) {
-    return ReturnMessage(false, "Update failed") 
+    return ReturnMessage(false, "Update failed");
   }
 };
 
@@ -397,7 +428,7 @@ const updateChat = async (read: boolean, userId: string) => {
     });
 };
 
-const fileUploader = async (userId: string, fileObject: File, ) => {
+const fileUploader = async (userId: string, fileObject: File) => {
   const { adminDb, adminStorage } = await getAdminServices();
 
   const buffer = Buffer.from(await fileObject.arrayBuffer());
@@ -438,11 +469,18 @@ const fileUploader = async (userId: string, fileObject: File, ) => {
 
     return ReturnMessage(true, "Success");
   } catch (err) {
-    return ReturnMessage(false, "Something went wrong. Please try again later!")
+    return ReturnMessage(
+      false,
+      "Something went wrong. Please try again later!"
+    );
   }
 };
 
-export const sendSupportMessage = async (userId: string, message: string | File, messageType?: boolean): Promise<ReturnedMessage> => {
+export const sendSupportMessage = async (
+  userId: string,
+  message: string | File,
+  messageType?: boolean
+): Promise<ReturnedMessage> => {
   try {
     const { adminDb } = await getAdminServices();
 
@@ -462,11 +500,18 @@ export const sendSupportMessage = async (userId: string, message: string | File,
 
     return ReturnMessage(true, "Success");
   } catch (err) {
-    return ReturnMessage(false, "Something went wrong. Please try again later!")
+    return ReturnMessage(
+      false,
+      "Something went wrong. Please try again later!"
+    );
   }
 };
 
-export const setUserSupportChat = async (userId: string, message: string | File, messageType?: boolean): Promise<ReturnedMessage> => {
+export const setUserSupportChat = async (
+  userId: string,
+  message: string | File,
+  messageType?: boolean
+): Promise<ReturnedMessage> => {
   try {
     const { adminDb } = await getAdminServices();
 
@@ -477,7 +522,8 @@ export const setUserSupportChat = async (userId: string, message: string | File,
       .doc(userId)
       .get();
 
-    if (chatExists?.exists === true) return ReturnMessage(false, "Chat already exists");
+    if (chatExists?.exists === true)
+      return ReturnMessage(false, "Chat already exists");
 
     const userData = await getUserData(userId);
 
@@ -498,6 +544,187 @@ export const setUserSupportChat = async (userId: string, message: string | File,
       return await sendSupportMessage(userId, message);
     }
   } catch (err) {
-    return ReturnMessage(false, "Something went wrong. Please try again later!")
+    return ReturnMessage(
+      false,
+      "Something went wrong. Please try again later!"
+    );
+  }
+};
+
+const getProduct = async (id: string): Promise<Product | null> => {
+  const { adminDb } = await getAdminServices();
+
+  const product = await adminDb
+    .collection("exko")
+    .doc("data")
+    .collection("items")
+    .doc(id)
+    .get();
+
+  return product?.data();
+};
+
+const nasiyaDateToTimestampObject = (monthsToAdd = 0) => {
+  const currentDate = new Date();
+  currentDate.setMonth(currentDate.getMonth() + monthsToAdd);
+
+  return {
+    seconds: Math.floor(currentDate.getTime() / 1000),
+    milliseconds: currentDate.getTime(),
+  };
+};
+
+const handleNasiyaObject = (nasiyaPeriod: number, totalPrice: number) => {
+  const nasiyaObject = {} as nasiyaItems;
+  const paymentSum = Math.round(totalPrice / nasiyaPeriod);
+
+  for (let i = 0; i < nasiyaPeriod; i++) {
+    nasiyaObject[`payment${i + 1}` as keyof nasiyaItems] = {
+      date: nasiyaDateToTimestampObject(i),
+      condition: i === 0,
+      sum: paymentSum,
+    };
+  }
+
+  return nasiyaObject;
+};
+
+export const order = async (
+  userId: string,
+  cart: CartItem[],
+  location: string,
+  nasiyaPeriod?: string
+) => {
+  try {
+    const { adminDb } = await getAdminServices();
+
+    const productPromises = cart
+      .filter((item) => item?.id)
+      .map((item) =>
+        getProduct(item.id).then((product) => ({
+          item,
+          product: product,
+        }))
+      );
+
+    const [userData, productsData] = await Promise.all([
+      getUserData(userId),
+      Promise.all(productPromises),
+    ]);
+
+    const filteredCartItems = productsData.map(({ item, product }) => ({
+      id: item.id,
+      image: product?.image || product?.images,
+      name: product?.name || product?.title,
+      price: product?.discount || product?.price,
+      totalPrice: (product?.discount as number) * item.quantity,
+      size: item?.size || null,
+      color: item?.color || null,
+      quantity: item.quantity,
+    }));
+
+    const newTotalPrice =
+      filteredCartItems?.reduce((sum, item) => sum + item.totalPrice, 0) || 0;
+
+    // if user selected nasiya period payment then add this additional data to the order
+    const nasiyaPeriodNumber = Number(nasiyaPeriod);
+    if (nasiyaPeriod?.trim() === "" || typeof nasiyaPeriodNumber !== "number") {
+      ReturnMessage(false, "Something went wrong. Please try again later!");
+    }
+    const nasiyaBuy =
+      nasiyaPeriodNumber !== 0
+        ? {
+            nasiyaCondition: null,
+            nasiya: handleNasiyaObject(nasiyaPeriodNumber, newTotalPrice),
+          }
+        : {};
+
+    const orderId = await adminDb.collection("temp").doc().id;
+
+    const basicData = {
+      confirmed: null,
+      orderAdress: location,
+      orderCondition: null,
+      orderDate: FieldValue.serverTimestamp(),
+      orderDeliveryDate: null,
+      orderId: orderId,
+      orderOwner: { ...userData, uid: userId },
+      orderTotalPrice: newTotalPrice,
+      orderItems: [...filteredCartItems],
+      ...nasiyaBuy,
+    };
+
+    const batch = adminDb.batch();
+
+    const userOrderRef = adminDb
+      .collection("exko")
+      .doc("users")
+      .collection("users")
+      .doc(userId)
+      .collection("orders")
+      .doc(orderId);
+
+    const globalOrderRef = adminDb
+      .collection("exko")
+      .doc("data")
+      .collection("orders")
+      .doc(orderId);
+
+    batch.set(userOrderRef, basicData);
+    batch.set(globalOrderRef, basicData);
+
+    await batch.commit();
+
+    return { success: true };
+  } catch (err) {
+    return ReturnMessage(false, `${(err as Error)?.message || "Something went wrong. Please try again later!"}`);
+  }
+};
+
+export const cancelOrder = async (orderType: boolean, orderId: string, userId: string) => {
+  try {
+    const { adminDb } = await getAdminServices();
+
+    const userOrder = await getUserOrder(userId, orderId);
+    const isCancelable = userOrder?.confirmed === null;
+
+    if(!isCancelable) return ReturnMessage(false, "This order is not cancelable😝")
+
+    const updateVal = orderType
+      ? {
+          nasiyaCondition: false,
+        }
+      : {};
+
+      const batch = adminDb.batch();
+    
+      const userOrderRef = adminDb
+        .collection("exko")
+        .doc("users")
+        .collection("users")
+        .doc(userId)
+        .collection("orders")
+        .doc(orderId);
+        
+      const globalOrderRef = adminDb
+        .collection("exko")
+        .doc("data")
+        .collection("orders")
+        .doc(orderId);
+      
+      const updateData = {
+        confirmed: undefined,
+        orderCondition: false,
+        ...updateVal,
+      };
+      
+      batch.update(userOrderRef, updateData);
+      batch.update(globalOrderRef, updateData);
+
+      await batch.commit();
+    
+    return { success: true };
+  } catch (err) {
+    return ReturnMessage(false, `${(err as Error)?.message || "Something went wrong. Please try again later!"}`);
   }
 };

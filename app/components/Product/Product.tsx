@@ -8,6 +8,7 @@ import ProductImage from "./ProductImage";
 import ShoppingDetails from "./ShoppingDetails";
 import RelatedProducts from "./RelatedProducts";
 import { ProductShuffler } from "../Extra/Extra";
+import Viewer from "../Extra/Viewer";
 
 export default function Product({
   productId,
@@ -37,20 +38,20 @@ export default function Product({
   return (
     <>
       <button
-        className="w-full bg-transparent border-none"
+        className="w-full bg-transparent border-none hidden middle:block"
         onClick={() => window?.history?.state.idx > 0 ? navigate(-1) : navigate("/")}
       >
-        {/* <IoMdArrowRoundBack /> {translateText().backToBtn} */}
         <h2 className="w-fit mt-[2rem] mx-auto mb-0 cursor-pointer text-[1.5rem]">
             <IoMdArrowRoundBack /> Ortga
         </h2>
       </button>
-      <div className="w-[90%] flex rounded-[20px] my-[2rem] mx-auto">
+      <div className="w-[95%] middle:w-[90%] flex flex-col middle:flex-row rounded-[20px] my-[2rem] mx-auto">
         <ProductImage productImage={product?.image || product?.images} currentProduct={product} />
         <ShoppingDetails productDetails={product} />
       </div>
 
       <RelatedProducts relatedProducts={relatedProducts}/>
+      <Viewer productImage={product?.image || product?.images}/>
     </>
   );
 }

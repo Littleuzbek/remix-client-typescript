@@ -26,10 +26,10 @@ export default function SearchResult() {
 
   return (
     <div
-      className="results bg-[white] fixed left-[0] right-[0] top-[5rem] bottom-[0] z-[3] py-[1rem] overflow-auto"
+      className="bg-[white] fixed left-[0] right-[0] top-[3rem] bottom-[0] z-100 pb-[1rem] overflow-auto"
       style={results?.length !== 0 ? {} : { display: "none" }}
     >
-      <div className="w-[90%] mx-auto">
+      <div className="w-[95%] mx-auto">
         <Collection all={results} section={"Qidiruv natijalari"} />
       </div>
 

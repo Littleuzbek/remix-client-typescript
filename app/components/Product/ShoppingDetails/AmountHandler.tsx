@@ -10,7 +10,7 @@ export default function AmountHandler({
   onAmountHandler,
 }: AmountProps) {
   return (
-    <div className="w-[8rem] my-[.5rem]">
+    <div className="hidden middle:block w-[8rem] my-[.5rem]">
       {/* <p>{translateText().amount}:</p> */}
       <p className="mt-[.5rem] mb-[.3rem]">Miqdor:</p>
       <div className="w-full h-[2.2rem] flex justify-between items-center bg-[white] border border-[rgb(160, 160, 160)] rounded-[20px] overflow-hidden">

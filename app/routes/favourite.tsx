@@ -3,6 +3,14 @@ import genie from "../assets/genie.webp";
 import { RootState } from "~/root";
 import Collection from "../components/Home/Collection";
 import { Product } from "~/utils";
+import { MetaFunction } from "@remix-run/node";
+
+export const meta: MetaFunction = () => {
+  return [
+    { title: "FAVOURITES / EXKO" },
+    { name: "EXKO favourites", content: "Welcome to EXKO!" },
+  ];
+};
 
 export default function Favourite() {
   const wishes = useSelector(

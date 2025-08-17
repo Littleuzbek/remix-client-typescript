@@ -5,8 +5,8 @@ export default function Footer() {
     window.open(link, "_blank");
   };
   return (
-    <div className="footer w-full h-[15rem] grid place-items-center bg-[#f0f2f5]">
-      <div>
+    <div className="footer w-full h-[17rem] middle:h-[15rem] grid place-items-center bg-[#f0f2f5] ">
+      <div className="mb-[3rem] middle:mb-[0]">
         <Link
           to={"/"}
           className='flex w-full text-[2rem] font-["Playfair_Display",serif] [font-optical-sizing:auto] not-italic font-semibold text-[var(--first-color)] select-none cursor-pointer font-[600] no-underline justify-center'

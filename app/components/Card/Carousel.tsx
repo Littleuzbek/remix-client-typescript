@@ -33,7 +33,7 @@ export default function Carousel({ productImg, viewMode, inProduct }: Props) {
       spaceBetween={0}
       slidesPerView={1}
       onSwiper={() => {}}
-      style={{ width: "100%", height: "auto" }}
+      style={{ width: "100%", height: "fit-content" }}
     >
       {(Array.isArray(productImg) ? productImg : [productImg])?.map(
         (pic, index) => (
@@ -49,7 +49,7 @@ export default function Carousel({ productImg, viewMode, inProduct }: Props) {
               role="button"
               loading="lazy"
               src={isString(pic) ? pic : URL.createObjectURL(pic)}
-              className="image w-full "
+              className="image w-full"
               style={
                 productImg
                   ? {
