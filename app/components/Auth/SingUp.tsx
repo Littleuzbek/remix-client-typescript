@@ -78,7 +78,7 @@ export default function SignUp() {
           type="text"
           required
           ref={name}
-          className="w-full h-[3.2rem] rounded-[10px] pt-[5px] px-[10px] mt-[.7rem] text-[1.2rem] border-2 border-[black] relative"
+          className="w-full h-[3.2rem] rounded-[10px] pt-[5px] px-[10px] mt-[.7rem] text-[1.2rem] border-2 border-[black] relative focus:outline-0"
         />
       </div>
       <div className="product-info w-[90%] h-fit  relative select-none">
@@ -86,7 +86,7 @@ export default function SignUp() {
           Email
         </p>
         <input
-          className="w-full h-[3.2rem] rounded-[10px] pt-[5px] px-[10px] mt-[.7rem] text-[1.2rem] border-2 border-[black] relative"
+          className="w-full h-[3.2rem] rounded-[10px] pt-[5px] px-[10px] mt-[.7rem] text-[1.2rem] border-2 border-[black] relative focus:outline-0"
           type="text"
           required
           ref={email}
@@ -97,7 +97,7 @@ export default function SignUp() {
           Password
         </p>
         <input
-          className="w-full h-[3.2rem] rounded-[10px] pt-[5px] px-[10px] mt-[.7rem] text-[1.2rem] border-2 border-[black] relative"
+          className="w-full h-[3.2rem] rounded-[10px] pt-[5px] px-[10px] mt-[.7rem] text-[1.2rem] border-2 border-[black] relative focus:outline-0"
           type="text"
           required
           ref={password}
