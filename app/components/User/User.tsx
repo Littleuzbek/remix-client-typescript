@@ -1,8 +1,7 @@
 import { Outlet, useLocation, useNavigate } from "@remix-run/react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { signOut } from "firebase/auth";
 import { auth } from "~/firebase";
-import { cartAction } from "../../store/CartSlice";
 import { RootState } from "~/root";
 import avatar1 from "../../assets/avatar/avatar1.png";
 import { UserData } from "~/utils";
@@ -11,7 +10,6 @@ export default function User() {
   const userInfo = useSelector((state: RootState) => state.cart.user) as UserData | null;
   const { pathname } = useLocation();
   const navigate = useNavigate();
-  const dispatch = useDispatch();
 
   return (
     <div className="w-[95%] middle:w-[90%] my-[1rem] mx-auto">
@@ -63,12 +61,8 @@ export default function User() {
             className="mb-[1rem] text-[1.2rem] w-full flex items-center justify-center gap-[5px] cursor-pointer select-none rounded-[10px] py-[.5rem] bg-transparent border-none"
             onClick={() => {
               signOut(auth);
-              dispatch(cartAction?.setUser(false));
-              dispatch(cartAction?.manageWish(false));
-              dispatch(cartAction?.setLogged(false));
-              dispatch(cartAction?.setClearCart());
-              navigate("/authentication");
-              navigate(0);
+              sessionStorage.clear()
+              window.location.href = "/authentication"
             }}
           >
             Tizimdan chiqish

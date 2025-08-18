@@ -41,18 +41,18 @@ export async function action({ request, params }: ActionFunctionArgs) {
   }
 
   if (actionType === "read") {
-    if (idToken === "null") return null;
+    if (idToken === "null" || idToken === "") return null;
 
     try {
       const checkedToken = await tokenVerifier(idToken);
-      if (typeof id !== "string" || !checkedToken || idToken !== id) return null;
+      if (typeof id !== "string" || !checkedToken || checkedToken !== id) return null;
       const userData = await getUserData(id);
       return { userData };
     } catch (err) {
       console.log(err);
     }
   }
-
+  
   return null;
 }
 

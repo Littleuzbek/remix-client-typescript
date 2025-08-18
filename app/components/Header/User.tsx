@@ -20,7 +20,7 @@ export default function User() {
       }
     });
   };
-
+  
   return (
     <button
       className="navbar-user h-[2.5rem] text-[black] text-[18px] rounded-[5px] p-[5px_1.5rem_5px_1rem] flex items-center justify-center gap-[5px] transition-all duration-300 cursor-pointer hover:text-[white] hover:bg-[var(--first-color)] relative select-none border-none"
@@ -33,7 +33,6 @@ export default function User() {
     >
       <LuUserRound className="text-[25px]" />
       {user ? user?.name : "Kirish"}
-      {/* Kirish */}
     </button>
   );
 }
