@@ -21,7 +21,7 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
   const isOrder = formData.get("ord") as string;
   const order = JSON.parse(isOrder);
 
-  if(id === "undefined") return redirect(`/authentication`);
+  if(id === "undefined" || idToken === "null") return redirect(`/authentication`);
 
   const tokenUid = await tokenVerifier(idToken);
 
@@ -52,7 +52,7 @@ export default function Orders() {
   useEffect(() => {
     const fetchOrders = async (): Promise<void> => {
       const token = await getToken();
-
+      
       fetcher.submit(
         { idToken: token, orderType: "read" },
         { method: "post", action: pathname }

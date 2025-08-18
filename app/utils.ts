@@ -334,7 +334,7 @@ export const tokenVerifier = async (
   }
 
   const { adminAuth } = await getAdminServices();
-  const decodedToken = await adminAuth.verifyIdToken(idToken);
+  const decodedToken = await adminAuth?.verifyIdToken(idToken);
   return decodedToken ? decodedToken?.uid : null;
 };
 

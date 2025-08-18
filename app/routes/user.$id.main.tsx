@@ -1,6 +1,11 @@
 import { ActionFunctionArgs, MetaFunction } from "@remix-run/node";
 import UserInfo from "~/components/User/Info/UserInfo";
-import { changeData, changeUserData, getUserData } from "~/utils";
+import {
+  changeData,
+  changeUserData,
+  getUserData,
+  tokenVerifier,
+} from "~/utils";
 
 export const meta: MetaFunction = () => {
   return [
@@ -13,14 +18,14 @@ export async function action({ request, params }: ActionFunctionArgs) {
   const { id } = params;
   const formData = await request.formData();
   const actionType = formData.get("action");
-
+  const idToken = formData.get("oldBirthDay") as string;
+  
   if (actionType === "action") {
     const userGender = formData.get("user-gender");
     const birthDay = formData.get("birthDay");
     const userName = formData.get("userName");
     const userSurname = formData.get("userSurname");
     const userNum = formData.get("userNum");
-    const idToken = formData.get("oldBirthDay");
 
     const newUserData = {
       userGender,
@@ -30,20 +35,22 @@ export async function action({ request, params }: ActionFunctionArgs) {
       userNum,
     };
 
-    await changeUserData(
-      id as string,
-      newUserData as changeData,
-      idToken as string
-    );
+    await changeUserData(id as string, newUserData as changeData, idToken);
 
     return true;
   }
 
   if (actionType === "read") {
-    if (typeof id !== "string") return null;
+    if (idToken === "null") return null;
 
-    const userData = await getUserData(id);
-    return { userData };
+    try {
+      const checkedToken = await tokenVerifier(idToken);
+      if (typeof id !== "string" || !checkedToken || idToken !== id) return null;
+      const userData = await getUserData(id);
+      return { userData };
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   return null;

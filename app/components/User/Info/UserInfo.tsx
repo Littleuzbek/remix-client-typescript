@@ -2,8 +2,7 @@ import { useEffect, useState } from "react";
 import { GenderSelection } from "./GenderSelect";
 import { DatePicker } from "./DatePicker";
 import { useFetcher, useNavigate } from "@remix-run/react";
-import { formatTimestampToDate } from "~/components/Extra/Extra";
-import { auth } from "~/firebase";
+import { formatTimestampToDate, getToken } from "~/components/Extra/Extra";
 import { useSelector } from "react-redux";
 import { RootState } from "~/root";
 import { UserData } from "~/utils";
@@ -40,7 +39,7 @@ export default function UserInfo() {
     e.preventDefault();
     try {
       const target = e.target as HTMLFormElement;
-      const oldBirthDay = await auth?.currentUser?.getIdToken();
+      const oldBirthDay = await getToken();
       const formData = new FormData(target);
 
       if(!oldBirthDay) return navigate("/authentication");

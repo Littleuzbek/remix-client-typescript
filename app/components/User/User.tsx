@@ -68,6 +68,7 @@ export default function User() {
               dispatch(cartAction?.setLogged(false));
               dispatch(cartAction?.setClearCart());
               navigate("/authentication");
+              navigate(0);
             }}
           >
             Tizimdan chiqish

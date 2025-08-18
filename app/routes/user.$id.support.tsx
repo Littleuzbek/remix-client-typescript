@@ -17,7 +17,8 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
   const message = formData.get("message") as string;
   const file = formData.get("image");
 
-  if (message?.trim() === "") return false;
+  if (message?.trim() === "") return null;
+  if (idToken === "null") return redirect(`/authentication`)
 
   const tokenUid = await tokenVerifier(idToken as string);
 

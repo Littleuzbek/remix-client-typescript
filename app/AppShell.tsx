@@ -11,6 +11,7 @@ import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./firebase";
 import { UserData } from "./utils";
 import { action } from "./routes/user.$id.main";
+import { getToken } from "./components/Extra/Extra";
 
 type Props = {
   children: React.ReactNode;
@@ -29,6 +30,11 @@ export default function AppShell({ children }: Props) {
         const userData = sessionStorage.getItem("userData");
         if (!userData) {
           const formData = new FormData();
+          const oldBirthDay = await getToken();
+          
+          if (oldBirthDay) {
+            formData.append("oldBirthDay", oldBirthDay);
+          }
           formData.append("action", "read");
           fetcher.submit(formData, {
             method: "post",
@@ -47,7 +53,8 @@ export default function AppShell({ children }: Props) {
 
   useEffect(() => {
     if (fetcher?.data) {
-      const user = (fetcher?.data as {userData: UserData | undefined | null})?.userData
+      const user = (fetcher?.data as { userData: UserData | undefined | null })
+        ?.userData;
 
       if (user) {
         dispatch(cartAction.setUser(user));
