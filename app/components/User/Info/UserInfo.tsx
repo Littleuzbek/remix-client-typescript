@@ -2,16 +2,19 @@ import { useEffect, useState } from "react";
 import { GenderSelection } from "./GenderSelect";
 import { DatePicker } from "./DatePicker";
 import { useFetcher, useNavigate } from "@remix-run/react";
-import { UserData } from "~/utils";
 import { formatTimestampToDate } from "~/components/Extra/Extra";
 import { auth } from "~/firebase";
+import { useSelector } from "react-redux";
+import { RootState } from "~/root";
+import { UserData } from "~/utils";
 
-export default function UserInfo({ user }: { user: UserData | undefined }) {
+export default function UserInfo() {
   const [name, setName] = useState<string>("");
   const [surname, setSurname] = useState<string>("");
   const [gender, setGender] = useState<string>("male");
   const [birth, setBirth] = useState<string>("Tug'ilgan sana");
   const [num, setNum] = useState<string>("");
+  const user = useSelector((state: RootState) => state.cart.user) as UserData | null;
   const fetcher = useFetcher();
   const navigate = useNavigate();
 
@@ -37,11 +40,12 @@ export default function UserInfo({ user }: { user: UserData | undefined }) {
     e.preventDefault();
     try {
       const target = e.target as HTMLFormElement;
-      const token = await auth?.currentUser?.getIdToken();
+      const oldBirthDay = await auth?.currentUser?.getIdToken();
       const formData = new FormData(target);
 
-      if(!token) return navigate("/authentication");
-      formData.append("oldBirthDay", token);
+      if(!oldBirthDay) return navigate("/authentication");
+      formData.append("oldBirthDay", oldBirthDay);
+      formData.append("action", "action");
       fetcher.submit(formData, { method: "post" });
     } catch (err) {
       console.log(err);
