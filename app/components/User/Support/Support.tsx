@@ -192,7 +192,7 @@ export default function Support() {
         ref={scrollRef}
       >
         {messages.length === 0 && (
-          <p className="text-center text-[14px] opacity-70">Loading...</p>
+          <p className="text-center text-[14px] opacity-70">Not messages yet</p>
         )}
 
         {messages?.map((m, i) => (

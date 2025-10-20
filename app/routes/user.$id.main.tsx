@@ -35,9 +35,9 @@ export async function action({ request, params }: ActionFunctionArgs) {
       userNum,
     };
 
-    await changeUserData(id as string, newUserData as changeData, idToken);
+  const promise = await changeUserData(id as string, newUserData as changeData, idToken);
 
-    return true;
+    return promise;
   }
 
   if (actionType === "read") {

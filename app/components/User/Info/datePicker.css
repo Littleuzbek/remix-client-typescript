@@ -1,6 +1,6 @@
 .date-picker {
   position: relative;
-  width: 20rem; 
+  width: 20rem;
 }
 
 .date-picker-button {
@@ -31,7 +31,7 @@
 
 .date-picker-popup {
   position: absolute;
-  bottom: calc(100% + 8px); 
+  bottom: calc(100% + 8px);
   left: 0;
   z-index: 10;
   width: 300px;
@@ -145,4 +145,128 @@
 .date-picker-popup-bottom {
   bottom: auto;
   top: calc(100% + 8px);
+}
+
+/* Add styles for month/year selector buttons */
+.month-year-selector {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.month-year-button {
+  background-color: transparent;
+  border: none;
+  font-size: 16px;
+  font-weight: 600;
+  color: #2d3748;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+
+.month-year-button:hover {
+  background-color: #edf2f7;
+}
+
+.month-year-button:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(49, 130, 206, 0.25);
+}
+
+/* Add styles for months grid */
+.months-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  padding: 16px 12px;
+  gap: 8px;
+}
+
+.month-cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 50px;
+  background-color: #f7fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #2d3748;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.month-cell:hover {
+  background-color: #edf2f7;
+  border-color: #cbd5e0;
+}
+
+.month-cell.selected {
+  background-color: #3182ce;
+  color: white;
+  border-color: #3182ce;
+  font-weight: 600;
+}
+
+.month-cell:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(49, 130, 206, 0.25);
+}
+
+/* Add styles for years scrollable container */
+.years-container {
+  display: flex;
+  flex-direction: column;
+  max-height: 280px;
+  overflow-y: scroll;
+  padding: 8px 12px;
+  gap: 4px;
+}
+
+.years-container::-webkit-scrollbar {
+  width: 6px;
+}
+
+.years-container::-webkit-scrollbar-track {
+  background: #f7fafc;
+}
+
+.years-container::-webkit-scrollbar-thumb {
+  background: #cbd5e0;
+  border-radius: 3px;
+}
+
+.years-container::-webkit-scrollbar-thumb:hover {
+  background: #a0aec0;
+}
+
+.year-cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  background-color: transparent;
+  border: none;
+  border-radius: 4px;
+  font-size: 18px;
+  color: #2d3748;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.year-cell:hover {
+  background-color: #edf2f7;
+}
+
+.year-cell.selected {
+  background-color: #3182ce;
+  color: white;
+  font-weight: 600;
+}
+
+.year-cell:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(49, 130, 206, 0.25);
 }

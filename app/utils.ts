@@ -400,7 +400,10 @@ export const changeUserData = async (
       .doc(userId)
       .update(filteredData);
 
-    return { success: true, updated: Object.keys(filteredData) };
+    const changeData = await getUserData(userId);
+    console.log(changeData);
+
+    return { success: true, updated: changeData };
   } catch (err: unknown) {
     return ReturnMessage(false, "Update failed");
   }
