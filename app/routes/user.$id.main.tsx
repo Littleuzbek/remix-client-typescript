@@ -19,7 +19,14 @@ export async function action({ request, params }: ActionFunctionArgs) {
   const formData = await request.formData();
   const actionType = formData.get("action");
   const idToken = formData.get("oldBirthDay") as string;
-  
+
+  if (idToken === "null" || idToken === "" || idToken === "undefined") {
+    return {
+      success: false,
+      error: "Something went wrong! Please try again later",
+    };
+  }
+
   if (actionType === "action") {
     const userGender = formData.get("user-gender");
     const birthDay = formData.get("birthDay");
@@ -35,25 +42,31 @@ export async function action({ request, params }: ActionFunctionArgs) {
       userNum,
     };
 
-  const promise = await changeUserData(id as string, newUserData as changeData, idToken);
+    const promise = await changeUserData(
+      id as string,
+      newUserData as changeData,
+      idToken
+    );
 
     return promise;
   }
 
   if (actionType === "read") {
-    if (idToken === "null" || idToken === "") return null;
-
     try {
       const checkedToken = await tokenVerifier(idToken);
-      if (typeof id !== "string" || !checkedToken || checkedToken !== id) return null;
+      if (typeof id !== "string" || !checkedToken || checkedToken !== id)
+        return null;
       const userData = await getUserData(id);
       return { userData };
     } catch (err) {
       console.log(err);
     }
   }
-  
-  return null;
+
+  return {
+    success: false,
+    error: "Something went wrong! Please try again later",
+  };
 }
 
 export default function Main() {

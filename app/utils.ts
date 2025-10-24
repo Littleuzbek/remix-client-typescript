@@ -235,7 +235,7 @@ export const getUserOrder = async (userId: string, orderId: string): Promise<Ord
   return order?.data();
 };
 
-const ReturnMessage = (
+export const ReturnMessage = (
   condition: boolean,
   message: string
 ): { success: boolean; error: string } => {
