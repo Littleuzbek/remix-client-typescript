@@ -48,8 +48,5 @@
     "firebase": "^11.10.0",
     "uuid": "^11.1.0",
     "date-fns": "^4.1.0"
-  },
-   "optionalDependencies": {
-    "@rollup/rollup-linux-x64-gnu": "*"
   }
 }
