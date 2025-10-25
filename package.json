@@ -48,5 +48,10 @@
     "firebase": "^11.10.0",
     "uuid": "^11.1.0",
     "date-fns": "^4.1.0"
-  }
+  },
+  "optionalDependencies": {
+    "@parcel/watcher-linux-x64-glibc": "^2.4.1",
+    "lightningcss-linux-x64-gnu": "^1.27.0"
+  
+}
 }
