@@ -11,7 +11,8 @@ export const meta: MetaFunction = () => {
 
 export const action = async ({request}: ActionFunctionArgs) => {
   const formData = await request.formData()
-
+  console.log("e");
+  
   try {
     const location = formData.get("location") as string;
     const nasiyaPeriod = formData.get("nasiyaPeriod") as string;

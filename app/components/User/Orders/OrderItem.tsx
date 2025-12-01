@@ -2,6 +2,7 @@ import { Link } from "@remix-run/react";
 import { PriceFormatter } from "~/components/Extra/Extra";
 import { OrderProps } from "../../../utils";
 import Carousel from "../../Card/Carousel";
+import { translateText } from "~/components/Extra/Translation";
 
 export default function OrderItem({
   orderItem,
@@ -17,7 +18,7 @@ export default function OrderItem({
           className="flex gap-[1rem] text-[19px] items-center no-underline"
         >
           <p className="bg-[var(--first-color)] text-[white] py-[3px] px-[10px] rounded-[10px]">
-            Nomi:
+            {translateText()?.orderNameLabel}:
           </p>
           <p className="text-[black]">{orderItem?.name}</p>
         </Link>
@@ -26,7 +27,7 @@ export default function OrderItem({
           className="flex gap-[1rem] text-[19px] items-center"
         >
           <p className="bg-[var(--first-color)] text-[white] py-[3px] px-[10px] rounded-[10px]">
-            Rangi:
+            {translateText()?.orderColorLabel}:
           </p>
           <p>{orderItem?.color}</p>
         </span>
@@ -35,30 +36,30 @@ export default function OrderItem({
           className="flex gap-[1rem] text-[19px] items-center"
         >
           <p className="bg-[var(--first-color)] text-[white] py-[3px] px-[10px] rounded-[10px]">
-            O&apos;lchami:
+            {translateText()?.orderSizeLabel}:
           </p>
           <p>{orderItem?.size}</p>
         </span>
         <span className="flex gap-[1rem] text-[19px] items-center">
           <p className="bg-[var(--first-color)] text-[white] py-[3px] px-[10px] rounded-[10px]">
-            Soni:
+            {translateText()?.orderQuantityLabel}:
           </p>
           <p>{orderItem?.quantity}</p>
         </span>
         <span className="flex gap-[1rem] text-[19px] items-center">
           <p className="bg-[var(--first-color)] text-[white] py-[3px] px-[10px] rounded-[10px]">
-            Narxi:
+            {translateText()?.orderProductPriceLabel}:
           </p>
-          <p>{PriceFormatter(orderItem?.price)} so&apos;m</p>
+          <p>{PriceFormatter(orderItem?.price)  + " " + translateText()?.orderPrice_currency} </p>
         </span>
         <span
           style={orderItem?.quantity === 1 ? { display: "none" } : {}}
           className="flex gap-[1rem] text-[19px] items-center"
         >
           <p className="bg-[var(--first-color)] text-[white] py-[3px] px-[10px] rounded-[10px]">
-            Umumiy narxi:
+            {translateText()?.orderProductPriceLabel}:
           </p>
-          <p>{PriceFormatter(orderItem?.totalPrice)} so&apos;m</p>
+          <p>{PriceFormatter(orderItem?.totalPrice) + " " + translateText()?.orderPrice_currency}</p>
         </span>
       </div>
     </div>

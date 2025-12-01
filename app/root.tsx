@@ -27,30 +27,6 @@ export const links: LinksFunction = () => [
   },
   {
     rel: "stylesheet",
-    href: "https://fonts.googleapis.com/css2?family=Teko&display=swap",
-  },
-  {
-    rel: "stylesheet",
-    href: "https://fonts.googleapis.com/css2?family=Teko:wght@500&display=swap",
-  },
-  {
-    rel: "stylesheet",
-    href: "https://fonts.googleapis.com/css2?family=Archivo:ital,wght@1,300&display=swap",
-  },
-  {
-    rel: "stylesheet",
-    href: "https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@1,300&display=swap",
-  },
-  {
-    rel: "stylesheet",
-    href: "https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital@1&display=swap",
-  },
-  {
-    rel: "stylesheet",
-    href: "https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600&display=swap",
-  },
-  {
-    rel: "stylesheet",
     href: "https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap",
   },
   {
@@ -76,7 +52,7 @@ export const loader = async () => {
 export const clientLoader = async ({ serverLoader }: ClientLoaderFunctionArgs) => {
   const state = store.getState();
   if (state?.cart?.products) return { products: state?.cart?.products || [] };
-
+  
   const loaderData = await serverLoader() as { products: Product[] };
   const query = loaderData?.products;
   return { products: query };

@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useFetcher, useLoaderData } from "@remix-run/react";
 import { loader } from "./root";
@@ -21,6 +21,8 @@ export default function AppShell({ children }: Props) {
   const data = useLoaderData<typeof loader>();
   const dispatch = useDispatch();
   const fetcher = useFetcher<typeof action>();
+  const [fontLink, setFontLink] = useState<string>("");
+  const [fontType, setFontType] = useState<string>("");
 
   useEffect(() => {
     onAuthStateChanged(auth, async (user) => {
@@ -31,7 +33,7 @@ export default function AppShell({ children }: Props) {
         if (!userData) {
           const formData = new FormData();
           const oldBirthDay = await getToken();
-          
+
           if (oldBirthDay) {
             formData.append("oldBirthDay", oldBirthDay);
           }
@@ -48,6 +50,26 @@ export default function AppShell({ children }: Props) {
         dispatch(cartAction.setLogged(false));
       }
     });
+
+    if (localStorage.getItem("exkoLang") === "KR") {
+      setFontLink(
+        "https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap"
+      );
+      setFontType("Noto Sans KR");
+    }
+    if (localStorage.getItem("exkoLang") === "UZ") {
+      setFontLink(
+        "https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,600;1,300;1,400&display=swap"
+      );
+      setFontType("Barlow Condensed");
+    }
+    if (localStorage.getItem("exkoLang") === "RU") {
+      setFontLink(
+        "https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap"
+      );
+      setFontType("Montserrat");
+    }
+
     // eslint-disable-next-line
   }, []);
 
@@ -72,12 +94,20 @@ export default function AppShell({ children }: Props) {
   }, [data, dispatch]);
 
   return (
-    <div className="w-full h-full mt-[3rem] middle:mt-[0]">
-      <Header />
-      {children}
-      <Footer />
-      <Scrollup />
-      <CartBtn />
-    </div>
+    <>
+      <style>{`
+        @import url(${fontLink});
+        
+        .font-fixed {
+          font-family: ${fontType} sans-serif !important;
+          `}</style>
+      <div className="w-full h-full mt-[3rem] middle:mt-[0] font-fixed">
+        <Header />
+        {children}
+        <Footer />
+        <Scrollup />
+        <CartBtn />
+      </div>
+    </>
   );
 }

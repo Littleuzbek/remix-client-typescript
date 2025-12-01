@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { X, Check } from "lucide-react";
+import { translateText } from "../Extra/Translation";
 
 interface Props {
   totalDiscountVal: string;
@@ -25,8 +26,8 @@ export default function NasiyaPeriod({
   return (
     <div className="w-full h-full bg-[rgba(0,0,0,0.3)] fixed top-[0] left-[0] z-100 flex items-center justify-center">
       <div className="w-[95%] middle:w-[27rem] bg-[white] rounded-[10px] py-[1rem] px-[1.5rem] grid gap-[1rem] text-[19px]">
-        <h2>Muddatli to&apos;lov</h2>
-        <p>Birinchi to&apos;lov vaqti: Hozir</p>
+        <h2>{translateText()?.nasiyaLabel}</h2>
+        <p>{translateText()?.nasiyaFirstPayment}</p>
 
         <button
           type="button"
@@ -35,8 +36,8 @@ export default function NasiyaPeriod({
           }`}
           onClick={() => setPeriod(3)}
         >
-          <p>3 oy</p>
-          <p>{on3} so&apos;m/oyiga</p>
+          <p>3 {translateText()?.nasiyaMonth}</p>
+          <p>{on3} {translateText()?.orderPrice_currency}/{translateText()?.nasiyaMonthly}</p>
         </button>
         <button
           type="button"
@@ -45,8 +46,8 @@ export default function NasiyaPeriod({
           }`}
           onClick={() => setPeriod(6)}
         >
-          <p>6 oy</p>
-          <p>{on6} so&apos;m/oyiga</p>
+          <p>6 {translateText()?.nasiyaMonth}</p>
+          <p>{on6} {translateText()?.orderPrice_currency}/{translateText()?.nasiyaMonthly}</p>
         </button>
         <button
           type="button"
@@ -55,13 +56,13 @@ export default function NasiyaPeriod({
           }`}
           onClick={() => setPeriod(12)}
         >
-          <p>12 oy</p>
-          <p>{on12} so&apos;m/oyiga</p>
+          <p>12 {translateText()?.nasiyaMonth}</p>
+          <p>{on12} {translateText()?.orderPrice_currency}/{translateText()?.nasiyaMonthly}</p>
         </button>
 
         <div className="flex justify-between border-t-3 border-[rgba(0,0,0,0.2)] pt-[.5rem]">
-          <p>Jami:</p>
-          <p>{totalDiscountVal} so&apos;m</p>
+          <p>{translateText()?.cartTotalSum}:</p>
+          <p>{totalDiscountVal} {translateText()?.orderPrice_currency}</p>
         </div>
         <div className="h-[2.2rem] flex gap-[.5rem] justify-end">
           <button

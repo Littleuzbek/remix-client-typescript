@@ -4,6 +4,7 @@ import { Product } from "~/utils";
 import Carousel from "./Carousel";
 import WishButton from "./WishButton";
 import AddToCart from "./AddToCart";
+import { translateText } from "../Extra/Translation";
 
 interface Props extends Product {
   product: Product;
@@ -28,17 +29,17 @@ function Card({ id, image, price, oldPrice, product, title }: Props) {
         </p>
         {/* <p>⭐ {`${rating} (${feedback} sharhlar)`}</p> */}
         <p className="w-fit text-[.8rem] middle:text-[.9rem] leading-[1.4rem] line-clamp-2 text-ellipsis px-[5px] bg-[yellow]">
-          {PriceFormatter(price / 12)} so&apos;m /oyiga
+          {PriceFormatter(price / 12)} {translateText()?.orderPrice_currency} /{translateText()?.nasiyaMonthly}
         </p>
       </div>
 
       <div className="w-full flex items-end justify-between">
         <div className="price m-[5px]">
           <p className="text-[.8rem] middle:text-[1.1rem]">
-            <s>{PriceFormatter(oldPrice)} so&apos;m</s>
+            <s>{PriceFormatter(oldPrice)} {translateText()?.orderPrice_currency}</s>
           </p>
           <p className="middle:text-[1.3rem] font-semibold">
-            {PriceFormatter(price)} so&apos;m
+            {PriceFormatter(price)} {translateText()?.orderPrice_currency}
           </p>
         </div>
         <AddToCart product={product} />

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import "./gender.css";
+import { translateText } from "~/components/Extra/Translation";
 
 interface genderSelection {
   onChange: (gender: string) => void;
@@ -45,7 +46,7 @@ export function GenderSelection({
         />
         <label htmlFor="male" className="gender-label">
           <span className="radio-custom"></span>
-          Erkak
+          {translateText()?.userGenderMan}
         </label>
       </div>
 
@@ -61,7 +62,7 @@ export function GenderSelection({
         />
         <label htmlFor="female" className="gender-label">
           <span className="radio-custom"></span>
-          Ayol
+          {translateText()?.userGenderWoman}
         </label>
       </div>
     </div>

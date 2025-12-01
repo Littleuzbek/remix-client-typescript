@@ -4,6 +4,7 @@ import { RootState } from "~/root";
 import Collection from "../components/Home/Collection";
 import { Product } from "~/utils";
 import { MetaFunction } from "@remix-run/node";
+import { translateText } from "~/components/Extra/Translation";
 
 export const meta: MetaFunction = () => {
   return [
@@ -19,7 +20,7 @@ export default function Favourite() {
   return (
     <div className="home-page w-[90%] mx-[auto] relative">
       {wishes?.length !== 0 ? (
-        <Collection all={wishes} section="Saralanganlar" />
+        <Collection all={wishes} section={translateText()?.headerFavouriteButton} />
       ) : (
         <img
           src={genie}

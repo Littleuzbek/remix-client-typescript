@@ -10,6 +10,13 @@ import TotalPrice from "./TotalPrice";
 import Item from "./Item";
 import { cartAction } from "~/store/CartSlice";
 import ItemMobile from "./ItemMobile";
+import { receiptHandler } from "../Extra/Extra";
+import { translateText } from "../Extra/Translation";
+
+export interface stateStr {
+  ssr: boolean;
+  client: boolean;
+}
 
 export default function Cart() {
   const cart = useSelector((state: RootState) => state.cart.cart);
@@ -17,7 +24,7 @@ export default function Cart() {
   const totalDiscount = useSelector(
     (state: RootState) => state.cart.totalDiscount
   );
-  const [loader, setLoader] = useState<boolean>(false);
+  const [loader, setLoader] = useState<stateStr>({ ssr: false, client: false });
   const dispatch = useDispatch();
   const fetcher = useFetcher();
 
@@ -37,7 +44,7 @@ export default function Cart() {
   const orderHandler = async (e: React.FormEvent) => {
     const target = e.target as HTMLFormElement;
     try {
-      setLoader(true);
+      setLoader({ ssr: true, client: false });
       const idToken = await verifyUser();
       const formData = new FormData(target);
 
@@ -54,32 +61,87 @@ export default function Cart() {
 
       dispatch(cartAction.setClearCart());
     } catch (err) {
-      setLoader(false);
+      setLoader({ ssr: false, client: false });
       console.log(err);
     }
   };
 
-  useEffect(() => {
-    if (loader && fetcher?.data) {
-      setLoader(false);
+  const nonUserBuy = (e: React.FormEvent<HTMLFormElement>) => {
+    const formData = new FormData(e.currentTarget);
+
+    setLoader({ ssr: false, client: true });
+    const userName = formData.get("nonUserName");
+    const userNumber = formData.get("nonUserNumber");
+    const userLocation = formData.get("location");
+
+    const day = new Date().getDate();
+    const month = new Date().getMonth() + 1;
+    const year = new Date().getFullYear();
+    const hours = new Date().getHours();
+    const minutes = new Date().getMinutes();
+
+    const token = "8151517328:AAEn05AsKM656h7U5tsZnVUTmQoeWWeJPxs";
+    const chat_id = "-1002591740953";
+
+    const newMessage = `
+    Name: ${userName}
+    Contact-info: ${userNumber}
+    Location: ${userLocation}
+    Time: ${day}.${month}.${year}, ${hours}:${minutes}
+    ${cart?.reduce((receipt, item, index) => {
+      return receipt + receiptHandler(item, index + 1);
+    }, "")}
+    `;
+
+    const url = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${chat_id}&text=${encodeURIComponent(
+      newMessage
+    )}`;
+
+    const api = new XMLHttpRequest();
+
+    api.open("GET", url, true);
+
+    api.onreadystatechange = function () {
+      if (api.readyState === 4) {
+        // Request completed
+        if (api.status === 200) {
+          // setAnim(translateText().sentSeccessfully);
+        } else {
+          // setAnim("error");
+          // botErrorHandler(newMessage);
+        }
+      }
+    };
+
+    api.send();
+    setLoader({ ssr: false, client: false });
+  };
+
+  useEffect(() => {7
+    if (loader?.ssr && fetcher?.data) {
+      setLoader({ ssr: false, client: false });
+    }
+
+    if (loader?.client) {
+      setLoader({ ssr: false, client: false });
     }
   }, [fetcher?.data, loader]);
 
   return (
     <>
-      {loader || (
+      {loader?.ssr || loader?.client || (
         <>
           {cart.length === 0 ? (
             <NoItem />
           ) : (
             <div className="w-[95%] middle:w-[90%] mt-[1rem] mx-auto">
               <h2 className="text-[1.5rem] text-center middle:text-start middle:text-[2rem] mb-[1rem] middle:mb-[.5rem]">
-                Savatingizda {cart.length} mahsulot
+                 {translateText()?.cartLabel(cart.length)}
               </h2>
               <div className="flex justify-between flex-col middle:flex-row mb-[1rem]">
                 <div className="w-[70%] h-fit rounded-[10px] border-3 border-[rgba(0,0,0,0.2)] hidden middle:block">
                   <div className="w-full h-[3rem] border-b-3 border-[rgba(0,0,0,0.2)] px-[1rem] flex justify-between items-center">
-                    <h3>Barcha mahsulotlar</h3>
+                    <h3>{translateText()?.cartOrdersLabel}</h3>
                   </div>
                   {cart.map((item: CartItem) => (
                     <Item product={item} key={item.cartItemId} />
@@ -96,6 +158,7 @@ export default function Cart() {
                   totalPriceVal={totalPrice}
                   totalDiscountVal={totalDiscount}
                   onOrder={orderHandler}
+                  onNonUserBuy={nonUserBuy}
                 />
               </div>
             </div>

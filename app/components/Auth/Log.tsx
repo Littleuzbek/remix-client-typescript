@@ -5,6 +5,7 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase";
 
 import { Loader } from "lucide-react";
+import { translateText } from "../Extra/Translation";
 
 export default function Login() {
   const email = useRef<null | HTMLInputElement>(null);
@@ -57,10 +58,10 @@ export default function Login() {
         EnterHandler();
       }}
     >
-      <h2>Login</h2>
+      <h2>{translateText()?.login}</h2>
       <div className="product-info w-[90%] h-fit  relative select-none">
         <p className="left-[5%] text-[.9rem] w-fit bg-[black] text-[white] rounded-[10px] px-[5px] absolute top-[0] z-[2]">
-          Email
+          {translateText()?.labelEmail}
         </p>
         <input
           type="text"
@@ -71,7 +72,7 @@ export default function Login() {
       </div>
       <div className="product-info w-[90%] h-fit  relative select-none">
         <p className="left-[5%] text-[.9rem] w-fit bg-[black] text-[white] rounded-[10px] px-[5px] absolute top-[0] z-[2]">
-          Password
+          {translateText()?.labelPassword}
         </p>
         <input
           type="text"
@@ -86,7 +87,7 @@ export default function Login() {
         // onClick={(e: React.MouseEvent<HTMLButtonElement>) => (loader ? e.preventDefault() : EnterHandler())}
         type={loader ? "button" : "submit"}
       >
-        {loader ? <Loader className="auth-loader" /> : "Login"}
+        {loader ? <Loader className="auth-loader" /> : `${translateText()?.login}`}
       </button>
 
       {error && <p className="text-[red] text-[1.2rem]">{error}</p>}

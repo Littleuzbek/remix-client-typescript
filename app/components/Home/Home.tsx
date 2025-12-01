@@ -3,6 +3,7 @@ import Banner from "./Banner";
 import Collection from "./Collection";
 import { useEffect, useState } from "react";
 import { ProductShuffler } from "../Extra/Extra";
+import { translateText } from "../Extra/Translation";
 
 type Props = {
   data: Product[] | null;
@@ -32,9 +33,9 @@ export default function Home({ data }: Props) {
   return (
     <>
       <Banner />
-      <Collection all={topSeller} section="Top seller" />
+      <Collection all={topSeller} section={translateText()?.topSeller} />
       <Banner />
-      <Collection all={otherProducts} scroll={true} section="Boshqa mahsulotlar" />
+      <Collection all={otherProducts} scroll={true} section={translateText()?.otherProducts} />
       <Banner />
       <Collection all={lastProducts} />
     </>

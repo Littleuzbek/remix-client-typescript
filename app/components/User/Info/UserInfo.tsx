@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "~/root";
 import { UserData } from "~/utils";
 import { cartAction } from "~/store/CartSlice";
+import { translateText } from "~/components/Extra/Translation";
 
 interface updateValue {
   name: string;
@@ -106,7 +107,7 @@ export default function UserInfo() {
 
   return (
     <div className="h-fit p-[1rem] border-3 border-[var(--first-color)] rounded-[20px]">
-      <h2 className="text-center">Ma&apos;lumotlarim</h2>
+      <h2 className="text-center">{translateText()?.userControlInfo}</h2>
 
       <form
         onSubmit={userDataChangeHandler}
@@ -115,7 +116,7 @@ export default function UserInfo() {
       >
         <div className="w-[20rem] h-fit my-[1.5rem] mx-[5%] relative select-none">
           <p className="text-[.9rem] w-fit bg-[black] text-[white] rounded-[10px] px-[5px] absolute top-[0] left-[2%] z-[2] ">
-            Ism
+            {translateText()?.userNameLabel}
           </p>
           <input
             type="text"
@@ -127,7 +128,7 @@ export default function UserInfo() {
         </div>
         <div className="w-[20rem] h-fit my-[1.5rem] mx-[5%] relative select-none">
           <p className="text-[.9rem] w-fit bg-[black] text-[white] rounded-[10px] px-[5px] absolute top-[0] left-[2%] z-[2] ">
-            Familiya
+            {translateText()?.userSurnameLabel}
           </p>
           <input
             type="text"
@@ -139,7 +140,7 @@ export default function UserInfo() {
         </div>
         <div className="w-[20rem] h-fit my-[1.5rem] mx-[5%] relative select-none">
           <p className="text-[.9rem] w-fit bg-[black] text-[white] rounded-[10px] px-[5px] absolute top-[0] left-[2%] z-[2] ">
-            Telfon raqam
+            {translateText()?.userNumberLabel}
           </p>
           <input
             type="text"
@@ -151,7 +152,7 @@ export default function UserInfo() {
         </div>
         <div className="w-[20rem] h-fit my-[1.5rem] mx-[5%] relative select-none">
           <p className="text-[.9rem] w-fit bg-[black] text-[white] rounded-[10px] px-[5px] absolute top-[0] left-[2%] z-[2] ">
-            Email
+            {translateText()?.userMailLabel}
           </p>
           <input
             type="text"
@@ -162,7 +163,7 @@ export default function UserInfo() {
         </div>
         <div className="w-[20rem] h-fit my-[1.5rem] mx-[5%] relative select-none">
           <p className="text-[.9rem] w-fit bg-[black] text-[white] rounded-[10px] px-[5px] absolute top-[0] left-[2%] z-[2] ">
-            Tug&apos;ilgan sana
+            {translateText()?.userBirthdayLabel}
           </p>
           <DatePicker
             onDateChange={(e) => setBirth(e as string | undefined)}

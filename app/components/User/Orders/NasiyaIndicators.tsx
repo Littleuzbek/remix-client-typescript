@@ -2,6 +2,7 @@ import { useState } from "react";
 import PaymentPeriod from "./PaymentPeriod";
 import { FaArrowDown } from "react-icons/fa6";
 import { nasiyaItems, OrderProps } from "~/utils";
+import { translateText } from "~/components/Extra/Translation";
 
 export default function NasiyaIndicators({ order }: {order: OrderProps}) {
   const [showNasiya, setShowNasiya] = useState<boolean>(false);
@@ -23,12 +24,12 @@ export default function NasiyaIndicators({ order }: {order: OrderProps}) {
               : active}
           `}
         >
-          <p className="bg-[var(--first-color)] text-[white] py-[3px] px-[10px] rounded-[10px]">Nasiya:</p>{" "}
+          <p className="bg-[var(--first-color)] text-[white] py-[3px] px-[10px] rounded-[10px]">{translateText()?.orderNasiyaLabel}:</p>{" "}
           {order?.nasiyaCondition
             ? "To'liq to'langan"
             : order?.nasiyaCondition !== null
             ? "Rad etilgan"
-            : "Keyingi to'lov sanasi"}{" "}
+            : translateText()?.orderShowNasiyaBtn}{" "}
           <FaArrowDown
           className=""
             onClick={() => {

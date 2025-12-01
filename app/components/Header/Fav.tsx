@@ -1,5 +1,6 @@
 import { Link, useLocation } from "@remix-run/react";
 import { CiHeart } from "react-icons/ci";
+import { translateText } from "../Extra/Translation";
 
 export default function Fav() {
   const { pathname } = useLocation();
@@ -14,7 +15,7 @@ export default function Fav() {
       to={"/favourite"}
     >
       <CiHeart className="text-[25px]"/>
-      Saralanganlar
+      {translateText()?.headerFavouriteButton}
     </Link>
   );
 }

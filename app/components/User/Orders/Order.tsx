@@ -6,6 +6,7 @@ import { useFetcher } from "@remix-run/react";
 import { useState } from "react";
 import { FaArrowDown } from "react-icons/fa6";
 import OrderItem from "./OrderItem";
+import { translateText } from "~/components/Extra/Translation";
 
 export default function Order({ order }: { order: OrderProps }) {
   const productImages = order?.orderItems?.map((item) =>
@@ -58,16 +59,16 @@ export default function Order({ order }: { order: OrderProps }) {
             `}
           >
             <p className="bg-[var(--first-color)] text-[white] py-[3px] px-[10px] rounded-[10px]">
-              Holat:
+              {translateText()?.orderConditionLabel}:
             </p>
             {order?.confirmed === null && "Tasdiqlanmagan"}
-            {order?.confirmed === false && "EXKO tomonidan rad etilgan"}
-            {order?.orderCondition === true && "Xaridor qabul qilgan"}
-            {order?.orderCondition === false && "Rad etilgan"}
+            {order?.confirmed === false && translateText()?.orderCondition_exko}
+            {order?.orderCondition === true && translateText()?.orderCondition_done}
+            {order?.orderCondition === false && translateText()?.orderCondition_canceled}
             {order?.confirmed === null ||
               (order?.confirmed === true &&
                 order?.orderCondition === null &&
-                "Jarayonda")}
+                translateText()?.orderCondition_active)}
           </span>
           {order?.confirmed !== false && order?.orderCondition !== false && (
             <span
@@ -83,32 +84,32 @@ export default function Order({ order }: { order: OrderProps }) {
               `}
             >
               <p className="bg-[var(--first-color)] text-[white] py-[3px] px-[10px] rounded-[10px]">
-                Yetkazib berish sanasi:
+                {translateText()?.orderDeliveryDateLabel}:
               </p>{" "}
               {order?.orderCondition
                 ? order?.orderDeliveryDate
                 : order?.orderCondition !== null
-                ? "Rad etilgan"
-                : "Jarayonda"}
+                ? translateText()?.orderCondition_canceled
+                : translateText()?.orderCondition_active}
             </span>
           )}
           <span className="flex gap-[1rem] text-[18px] items-center">
             <p className="bg-[var(--first-color)] text-[white] py-[3px] px-[10px] rounded-[10px]">
-              Yetkazib berish manzili:
+              {translateText()?.orderDeliveryAdressLabel}:
             </p>{" "}
             {order?.orderAdress}
           </span>
           <span className="flex gap-[1rem] text-[18px] items-center">
             <p className="bg-[var(--first-color)] text-[white] py-[3px] px-[10px] rounded-[10px]">
-              Buyurtma sanasi:
+              {translateText()?.orderDateLabel}:
             </p>{" "}
             {formatDate(order?.orderDate)}
           </span>
           <span className="flex gap-[1rem] text-[18px] items-center">
             <p className="bg-[var(--first-color)] text-[white] py-[3px] px-[10px] rounded-[10px]">
-              Buyurtma qiymati:
+              {translateText()?.orderPriceLabel}:
             </p>{" "}
-            {PriceFormatter(order?.orderTotalPrice)} so&apos;m
+            {PriceFormatter(order?.orderTotalPrice) + " " + translateText()?.orderPrice_currency}
           </span>
 
           <NasiyaIndicators order={order} />
@@ -120,7 +121,7 @@ export default function Order({ order }: { order: OrderProps }) {
               className="w-[50%] flex justify-center items-center py-[1rem] bg-[var(--first-color)] text-[19px] text-[white] rounded-[10px] relative select-none overflow-hidden"
               onSubmit={handleCancel}
             >
-              Buyurtmani bekor qilish
+              {translateText()?.orderCancelBtn}
               <button
                 type="submit"
                 className="left-[0] top-[0] bottom-[0] right-[0] bg-transparent border-none cursor-pointer absolute"
@@ -137,7 +138,7 @@ export default function Order({ order }: { order: OrderProps }) {
           className="w-full flex justify-between cursor-pointer bg-transparent border-none text-[19px] text-[black]"
           onClick={() => setShowItem(!showItem)}
         >
-          <p>Mahsulotlar soni: {order?.orderItems.length}</p>
+          <p>{translateText()?.orderShowProductsBtn}: {order?.orderItems.length}</p>
           <FaArrowDown
             style={
               showItem

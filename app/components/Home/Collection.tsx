@@ -2,6 +2,7 @@ import Skeleton from "../Card/Skeleton";
 import Card from "../Card/Card";
 import { useState } from "react";
 import { Product } from "~/utils";
+import { translateText } from "../Extra/Translation";
 
 type CollectionProps = {
   section?: string;
@@ -12,6 +13,7 @@ type CollectionProps = {
 export default function Collection({ all, scroll, section }: CollectionProps) {
   const [more, setMore] = useState(10);
   const visibleProducts = all ? all.slice(0, more) : all || [];
+
   return (
     <>
       <h2 className="my-[1rem] text-[1.5rem] middle:text-[2rem]">{section || ""}</h2>
@@ -52,7 +54,7 @@ export default function Collection({ all, scroll, section }: CollectionProps) {
               setMore(more + 10);
             }}
           >
-            Yana ko&apos;rsatish
+            {translateText()?.productShowMoreButton}
           </button>
         )}
       </div>

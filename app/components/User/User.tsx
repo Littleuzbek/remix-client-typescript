@@ -5,6 +5,7 @@ import { auth } from "~/firebase";
 import { RootState } from "~/root";
 import avatar1 from "../../assets/avatar/avatar1.png";
 import { UserData } from "~/utils";
+import { translateText } from "../Extra/Translation";
 
 export default function User() {
   const userInfo = useSelector((state: RootState) => state.cart.user) as UserData | null;
@@ -31,7 +32,7 @@ export default function User() {
                 : {}
             }
           >
-            Buyurtmalar
+            {translateText()?.userControlOrders}
           </button>
           <button
             className="mb-[1rem] text-[1.2rem] w-full flex items-center justify-center gap-[5px] cursor-pointer select-none rounded-[10px] py-[.5rem] bg-transparent border-none"
@@ -44,7 +45,7 @@ export default function User() {
                 : {}
             }
           >
-            Ma&apos;lumotlarim
+            {translateText()?.userControlInfo}
           </button>
           <button
             className="mb-[1rem] text-[1.2rem] w-full flex items-center justify-center gap-[5px] cursor-pointer select-none rounded-[10px] py-[.5rem] bg-transparent border-none"
@@ -55,7 +56,7 @@ export default function User() {
                 : {}
             }
           >
-            EXKO support
+            {translateText()?.userControlSupport}
           </button>
           <button
             className="mb-[1rem] text-[1.2rem] w-full flex items-center justify-center gap-[5px] cursor-pointer select-none rounded-[10px] py-[.5rem] bg-transparent border-none"
@@ -65,7 +66,7 @@ export default function User() {
               window.location.href = "/authentication"
             }}
           >
-            Tizimdan chiqish
+            {translateText()?.userControlExit}
           </button>
         </div>
 

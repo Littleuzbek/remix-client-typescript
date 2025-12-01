@@ -184,7 +184,7 @@ export default function Support() {
     <div className="h-fit p-[1rem] border-3 border-[var(--first-color)] rounded-[20px]">
       <div className="py-[10px] px-[1rem] border-b-3 border-[var(--first-color)] rounded-t-[10px] flex items-center justify-center gap-[1rem] bg-[var(--second-color)] ">
         <User className="w-[2.5rem] h-[2.5rem] rounded-full p-[5px] border-3 border-[var(--first-color)] text-[var(--first-color)]" />
-        <h2 className="text-[var(--first-color)]">EXKO</h2>
+        <h2 className='text-[var(--first-color)] font-["Playfair_Display",serif]'>EXKO</h2>
       </div>
       <div
         className="h-[30rem] p-[10px] bg-[var(--second-color)] flex flex-col-reverse gap-[.5rem] overflow-auto [&::-webkit-scrollbar]:hidden"

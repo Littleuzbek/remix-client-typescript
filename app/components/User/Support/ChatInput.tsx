@@ -1,4 +1,5 @@
 import { File, Loader, Paperclip, SendHorizontal, X } from "lucide-react";
+import { translateText } from "~/components/Extra/Translation";
 
 interface inputProps {
   fileVal: null | File;
@@ -16,7 +17,7 @@ export default function ChatInput({
   onFormSubmit
 }: inputProps) {
   return (
-    <form className="h-[3rem] bg-[var(--second-color)] border-3 border-[var(--first-color)] rounded-b-[10px] grid grid-cols-[4%_91%_5%] place-items-center relative"
+    <form className="h-[3rem] bg-[var(--second-color)] border-3 border-[var(--first-color)] rounded-b-[10px] grid grid-cols-[1fr_8fr_1fr] md:grid-cols-[1fr_18fr_1fr] lg:grid-cols-[7fr_86fr_7fr] place-items-center relative"
     onSubmit={onFormSubmit}
     >
       <input
@@ -35,7 +36,7 @@ export default function ChatInput({
         <X className="cursor-pointer" onClick={() => onSetFile(null)} />
       ) : (
         <label htmlFor="imagePicker">
-          <Paperclip className="cursor-pointer" />
+          <Paperclip className="cursor-pointer w-full h-full" />
         </label>
       )}
       {fileVal ? (
@@ -45,7 +46,7 @@ export default function ChatInput({
           className="w-full h-full text-[18px] bg-transparent border-none outline-none"
           type="text"
           name="message"
-          placeholder="Type here..."
+          placeholder={translateText()?.chatInputPlaceholder}
           required
           autoComplete="off"
           ref={inpRef}

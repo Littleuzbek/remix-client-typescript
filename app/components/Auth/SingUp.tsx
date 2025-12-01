@@ -3,6 +3,7 @@ import { useFetcher } from "@remix-run/react";
 import { auth } from "../../firebase";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { Loader } from "lucide-react";
+import { translateText } from "../Extra/Translation";
 
 export default function SignUp() {
   const name = useRef<null | HTMLInputElement>(null);
@@ -69,10 +70,10 @@ export default function SignUp() {
         EnterHandler();
       }}
     >
-      <h2>Sign Up</h2>
+      <h2>{translateText()?.signup}p</h2>
       <div className="product-info w-[90%] h-fit  relative select-none">
         <p className="left-[5%] text-[.9rem] w-fit bg-[black] text-[white] rounded-[10px] px-[5px] absolute top-[0] left-[2%] z-[2]">
-          Name
+          {translateText()?.labelName}
         </p>
         <input
           type="text"
@@ -83,7 +84,7 @@ export default function SignUp() {
       </div>
       <div className="product-info w-[90%] h-fit  relative select-none">
         <p className="left-[5%] text-[.9rem] w-fit bg-[black] text-[white] rounded-[10px] px-[5px] absolute top-[0] left-[2%] z-[2]">
-          Email
+          {translateText()?.labelEmail}
         </p>
         <input
           className="w-full h-[3.2rem] rounded-[10px] pt-[5px] px-[10px] mt-[.7rem] text-[1.2rem] border-2 border-[black] relative focus:outline-0"
@@ -94,7 +95,7 @@ export default function SignUp() {
       </div>
       <div className="product-info w-[90%] h-fit  relative select-none">
         <p className="left-[5%] text-[.9rem] w-fit bg-[black] text-[white] rounded-[10px] px-[5px] absolute top-[0] left-[2%] z-[2]">
-          Password
+          {translateText()?.labelPassword}
         </p>
         <input
           className="w-full h-[3.2rem] rounded-[10px] pt-[5px] px-[10px] mt-[.7rem] text-[1.2rem] border-2 border-[black] relative focus:outline-0"
@@ -108,7 +109,7 @@ export default function SignUp() {
         className="login-btn bg-[var(--first-color)] border-none rounded-[10px] text-[18px] text-[white] py-[.5rem] px-[20%] cursor-pointer duration-300 hover:bg-[var(--first-color-light)]"
         type={loader ? "button" : "submit"}
       >
-        {loader ? <Loader className="auth-loader" /> : "Sign Up"}
+        {loader ? <Loader className="auth-loader" /> : `${translateText()?.signup}`}
       </button>
 
       {error && <p className="text-[red] text-[1.2rem]">{error}</p>}

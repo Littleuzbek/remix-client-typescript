@@ -4,6 +4,7 @@ import { onAuthStateChanged } from "firebase/auth";
 import { Home, ShoppingCart, Heart, User } from "lucide-react";
 import MobileUser from "./MobileUser";
 import { auth } from "~/firebase";
+import { translateText } from "../Extra/Translation";
 
 const MobileHeader = () => {
   const [userMenu, setUserMenu] = useState<boolean>(false);
@@ -15,11 +16,11 @@ const MobileHeader = () => {
     {
       id: "favourite",
       icon: Heart,
-      label: "Favourite",
+      label: translateText()?.headerFavouriteButton,
       navigation: "/favourite",
       navigation2: "musaffoOsmon"
     },
-    { id: "cart", icon: ShoppingCart, label: "Cart", navigation: "/cart", navigation2: "musaffoOsmon" },
+    { id: "cart", icon: ShoppingCart, label: translateText()?.headerCartButton, navigation: "/cart", navigation2: "musaffoOsmon" },
     {
       id: "profile",
       icon: User,

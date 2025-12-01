@@ -1,4 +1,5 @@
 import { Link } from "@remix-run/react";
+import { translateText } from "../Extra/Translation";
 
 export default function Footer() {
   const redirectHandler = (link: string) => {
@@ -59,7 +60,7 @@ export default function Footer() {
           </button>
         </div>
         <p className="my-[.5rem] text-center">
-          Hamkorlik uchun 👉{" "}
+          {translateText()?.footerPartnership}  👉{" "}
           <button
             className="border-none bg-[transparent] text-[18px] cursor-pointer"
             onClick={() => redirectHandler("https://t.me/MarufRasul")}
@@ -68,7 +69,7 @@ export default function Footer() {
           </button>{" "}
         </p>
         <p className="my-[.5rem] text-center">
-          © Crypticalcoder. All rigths reserved
+          {translateText()?.footerRightsMessage}
         </p>
       </div>
     </div>

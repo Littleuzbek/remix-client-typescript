@@ -5,6 +5,7 @@ import { LuUserRound } from "react-icons/lu";
 import { auth } from "../../firebase";
 import { RootState } from "~/root";
 import { UserData } from "~/utils";
+import { translateText } from "../Extra/Translation";
 
 export default function User() {
   const user = useSelector((state: RootState) => state.cart.user) as UserData | null;
@@ -32,7 +33,7 @@ export default function User() {
       onClick={() => handleNavigation()}
     >
       <LuUserRound className="text-[25px]" />
-      {user ? user?.name : "Kirish"}
+      {user ? user?.name : `${translateText()?.headerLoginButton}`}
     </button>
   );
 }

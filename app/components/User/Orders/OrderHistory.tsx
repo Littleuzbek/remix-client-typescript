@@ -1,6 +1,7 @@
 import { OrderProps } from "~/utils";
 import Order from "./Order";
 import { useState } from "react";
+import { translateText } from "~/components/Extra/Translation";
 
 export default function OrderHistory({
   orderData,
@@ -18,7 +19,7 @@ export default function OrderHistory({
           }`}
           onClick={() => setCategory(true)}
         >
-          Faol
+          {translateText()?.orderTabActive}
         </button>
         <button
           className={`text-center py-[1rem] border-0 border-b-3 border-[var(--first-color)] border-x-none cursor-pointer rounded-bl-[10px] text-[18px] bg-transparent text-[black] ${
@@ -26,7 +27,7 @@ export default function OrderHistory({
           }`}
           onClick={() => setCategory(false)}
         >
-          Barchasi
+          {translateText()?.orderTabAll}
         </button>
       </div>
 

@@ -5,6 +5,7 @@ import { CartItem } from "~/utils";
 import { useDispatch } from "react-redux";
 import { cartAction } from "~/store/CartSlice";
 import { Link } from "@remix-run/react";
+import { translateText } from "../Extra/Translation";
 
 export default function Item({ product }: { product: CartItem }) {
   const dispatch = useDispatch();
@@ -57,24 +58,24 @@ export default function Item({ product }: { product: CartItem }) {
               className="w-[20%] text-[18px] text-[#a8a8a8] bg-transparent border-none cursor-pointer flex justify-center items-center gap-[.2rem] duration-500 hover:text-[black]"
               onClick={() => amountHandler("delete")}
             >
-              <BsTrash3Fill /> Yo&apos;q qilish
+              <BsTrash3Fill /> {translateText()?.cartItemDeleteBtn}
             </button>
           </div>
 
           <div className="w-full h-[60%] flex">
             <div className="w-[40%] flex justify-evenly flex-col">
               <span className="flex gap-[.4rem] text-[#a8a8a8]">
-                Sotuvchi: <p className="text-[black]">EXKO shop</p>{" "}
+                {translateText()?.cartItemSellerLabel}: <p className="text-[black]">EXKO {translateText()?.cartItemSeller}</p>{" "}
               </span>
               {product?.color && (
                 <span className="flex gap-[.4rem] text-[#a8a8a8]">
-                  Rang:{" "}
+                  {translateText()?.cartItemColorLabel}:{" "}
                   <p className="text-[black]">{product?.color || "Rangsiz"}</p>
                 </span>
               )}
               {product?.size && (
                 <span className="flex gap-[.4rem] text-[#a8a8a8]">
-                  O&apos;lcham:{" "}
+                  {translateText()?.cartItemSizLabel}:{" "}
                   <p className="text-[black]">
                     {product?.size || "O'lchamsiz"}
                   </p>
@@ -109,10 +110,10 @@ export default function Item({ product }: { product: CartItem }) {
             <div className="w-[40%] flex justify-evenly items-end flex-col pr-[4%]">
               <p className="text-[1.8rem] ">
                 {PriceFormatter(product?.discount * product?.quantity)}{" "}
-                s&apos;om
+                {translateText()?.orderPrice_currency}
               </p>
               <s>
-                {PriceFormatter(product?.price * product?.quantity)} s&apos;om
+                {PriceFormatter(product?.price * product?.quantity)} {translateText()?.orderPrice_currency}
               </s>
             </div>
           </div>

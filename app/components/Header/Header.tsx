@@ -7,6 +7,8 @@ import SearchResult from "./SearchResult";
 import MobileSearch from "./MobileSearch";
 import MobileHeader from "./MobileHeader";
 import Notification from "./Notification";
+import { translateText } from "../Extra/Translation";
+import Language from "./Language";
 
 export default function Header() {
   const { pathname } = useLocation();
@@ -20,6 +22,7 @@ export default function Header() {
         <Catalog />
         <Search />
         <Fav />
+        <Language />
         <User />
       </header>
 
@@ -30,22 +33,22 @@ export default function Header() {
           }
         >
           <Link prefetch="intent" to={"/category/electronics"} className={`${pathname && pathname?.includes("/electronics") ? "text-[white]" : "text-[black]"} no-underline active:text-[white]`}>
-            Elektronika
+            {translateText()?.catalogElectronics}
           </Link>
         </li>
         <li className={`${pathname && pathname?.includes("/books") ? "bg-[var(--first-color)]" : ""} p-[5px] rounded-[5px]`}>
           <Link prefetch="intent" to={"/category/books"} className={`${pathname && pathname?.includes("/books") ? "text-[white]" : "text-[black]"} no-underline active:text-[white]`}>
-            Kitoblar
+            {translateText()?.catalogBooks}
           </Link>
         </li>
         <li className={`${pathname && pathname?.includes("/clothes") ? "bg-[var(--first-color)]" : ""} p-[5px] rounded-[5px]`}>
           <Link prefetch="intent" to={"/category/clothes"} className={`${pathname && pathname?.includes("/clothes") ? "text-[white]" : "text-[black]"} no-underline active:text-[white]`}>
-            Kiyimlar
+            {translateText()?.catalogClothes}
           </Link>
         </li>
         <li className={`${pathname && pathname?.includes("/shoes") ? "bg-[var(--first-color)]" : ""} p-[5px] rounded-[5px]`}>
           <Link prefetch="intent" to={"/category/shoes"} className={`${pathname && pathname?.includes("/shoes") ? "text-[white]" : "text-[black]"} no-underline active:text-[white]`}>
-            Poyafzal
+            {translateText()?.catalogShoes}
           </Link>
         </li>
         <li
@@ -54,39 +57,39 @@ export default function Header() {
           }
         >
           <Link prefetch="intent" to={"/category/accessuaries"} className={`${pathname && pathname?.includes("/accessuaries") ? "text-[white]" : "text-[black]"} no-underline active:text-[white]`}>
-            Aksessuarlar
+            {translateText()?.catalogAccess}
           </Link>
         </li>
         <li
           className={`${pathname && pathname?.includes("/cosmetics") ? "bg-[var(--first-color)]" : ""} p-[5px] rounded-[5px]`}
         >
           <Link prefetch="intent" to={"/category/cosmetics"} className={`${pathname && pathname?.includes("/cosmetics") ? "text-[white]" : "text-[black]"} no-underline active:text-[white]`}>
-            Kosmetika
+            {translateText()?.catalogShoes}
           </Link>
         </li>
         <li className={`${pathname && pathname?.includes("/health") ? "bg-[var(--first-color)]" : ""} p-[5px] rounded-[5px]`}>
           <Link prefetch="intent" to={"/category/health"} className={`${pathname && pathname?.includes("/health") ? "text-[white]" : "text-[black]"} no-underline active:text-[white]`}>
-            Salomatlik
+            {translateText()?.catalogHealth}
           </Link>
         </li>
         <li className={`${pathname && pathname?.includes("/laptops") ? "bg-[var(--first-color)]" : ""} p-[5px] rounded-[5px]`}>
           <Link prefetch="intent" to={"/category/laptops"} className={`${pathname && pathname?.includes("/laptops") ? "text-[white]" : "text-[black]"} no-underline active:text-[white]`}>
-            Kompyuterlar
+            {translateText()?.catalogComputers}
           </Link>
         </li>
         <li className={`${pathname && pathname?.includes("/toys") ? "bg-[var(--first-color)]" : ""} p-[5px] rounded-[5px]`}>
           <Link prefetch="intent" to={"/category/toys"} className={`${pathname && pathname?.includes("/toys") ? "text-[white]" : "text-[black]"} no-underline active:text-[white]`}>
-            O&apos;yinchoqlar
+            {translateText()?.catalogToys}
           </Link>
         </li>
         <li className={`${pathname && pathname?.includes("/watches") ? "bg-[var(--first-color)]" : ""} p-[5px] rounded-[5px]`}>
           <Link prefetch="intent" to={"/category/watches"} className={`${pathname && pathname?.includes("/watches") ? "text-[white]" : "text-[black]"} no-underline active:text-[white]`}>
-            Saotlar
+            {translateText()?.catalogWatches}
           </Link>
         </li>
         <li className={`${pathname && pathname?.includes("/bu") ? "bg-[var(--first-color)]" : ""} p-[5px] rounded-[5px]`}>
           <Link prefetch="intent" to={"/category/bu"} className={`${pathname && pathname?.includes("/bu") ? "text-[white]" : "text-[black]"} no-underline active:text-[white]`}>
-            B/U
+            {translateText()?.catalogBU}
           </Link>
         </li>
       </ul>

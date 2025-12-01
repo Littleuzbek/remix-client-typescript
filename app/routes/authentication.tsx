@@ -3,6 +3,7 @@ import { ActionFunctionArgs, MetaFunction } from "@remix-run/node";
 import Login from "../components/Auth/Log";
 import SignUp from "../components/Auth/SingUp";
 import { login, signUp } from "../utils";
+import { translateText } from "~/components/Extra/Translation";
 
 export const meta: MetaFunction = () => {
   return [
@@ -31,9 +32,9 @@ export default function Authentication() {
     <div className="login-page w-full my-[2rem] grid place-items-center gap-[1rem]">
       {form ? <SignUp /> : <Login />}
       <div className="change-form w-[25rem] p-[.5rem] rounded-[10px] text-[18px] flex justify-center items-center gap-[.5rem] border-3 border-[var(--second-color)]">
-        {form ? "Not Newcomer" : "Newcomer"} ?
+        {form ? `${translateText()?.notNewComer}` : `${translateText()?.newComer}`} 
         <button className="text-[18px] bg-[var(--first-color)] text-[white] py-[.5rem] px-[1rem] rounded-[10px] border-none cursor-pointer duration-300 hover:bg-[var(--first-color-light)]" onClick={() => setForm(!form)}>
-          {form ? "Login" : " Sign Up"}
+          {form ? `${translateText()?.login}` : `${translateText()?.signup}`}
         </button>
       </div>
     </div>

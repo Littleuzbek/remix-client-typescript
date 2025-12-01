@@ -8,6 +8,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "~/root";
 import { Product } from "~/utils";
 import Collection from "~/components/Home/Collection";
+import { translateText } from "~/components/Extra/Translation";
 
 export const clientLoader = async ({ params }: ClientLoaderFunctionArgs) => {
   const { id } = params;
@@ -16,41 +17,41 @@ export const clientLoader = async ({ params }: ClientLoaderFunctionArgs) => {
     {
       path: "electronics",
       category: "electronics",
-      title: "Elektronika",
+      title: translateText()?.catalogElectronics,
     },
     { path: "books", category: "books", title: "Kitoblar" },
     {
       path: "kidsClothes",
       category: "kidsClothes",
-      title: "Bolalar kiyimlari",
+      title: translateText()?.catalogChildClothes,
     },
     {
       path: "womenClothes",
       category: "clothes",
-      title: "Ayollar kiyimlari",
+      title: translateText()?.catalogWomanClothes,
     },
     {
       path: "clothes",
       category: "clothes",
-      title: "Ayollar kiyimlari",
-      title2: "Erkaklar kiyimlari",
-      title3: "Bolalar kiyimlari",
+      title: translateText()?.catalogWomanClothes,
+      title2: translateText()?.catalogMenClothes,
+      title3: translateText()?.catalogChildClothes,
     },
     {
       path: "menClothes",
       category: "menClothes",
-      title: "Erkaklar kiyimlari",
+      title: translateText()?.catalogMenClothes,
     },
-    { path: "shoes", category: "shoes", title: "Poyafzal" },
-    { path: "cosmetics", category: "shampoo", title: "Kosmetika" },
-    { path: "health", category: "health", title: "Salomatlik" },
-    { path: "laptops", category: "laptops", title: "Kompyuterlar" },
-    { path: "toys", category: "toys", title: "O'yinchoqlar" },
-    { path: "watches", category: "watches", title: "Saotlar" },
+    { path: "shoes", category: "shoes", title: translateText()?.catalogShoes },
+    { path: "cosmetics", category: "shampoo", title: translateText()?.catalogCosmetics },
+    { path: "health", category: "health", title: translateText()?.catalogHealth },
+    { path: "laptops", category: "laptops", title: translateText()?.catalogComputers },
+    { path: "toys", category: "toys", title: translateText()?.catalogToys },
+    { path: "watches", category: "watches", title: translateText()?.catalogWatches },
     {
       path: "accessuaries",
       category: "accessuaries",
-      title: "Aksessuarlar",
+      title: translateText()?.catalogAccess,
     },
     { path: "bu", category: "bu", title: "B/U" },
   ];

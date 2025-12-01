@@ -1,6 +1,6 @@
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "~/firebase";
-import { manualTimestamp, Product } from "~/utils";
+import { CartItem, manualTimestamp, Product } from "~/utils";
 
 export const isString = (value: unknown) => typeof value === "string";
 
@@ -76,14 +76,26 @@ export function formatTimestampToDate(timeObj: null | timeFormat): string | null
 }
 
 export const formatDate = (unformatted: manualTimestamp | undefined, day?: undefined | boolean): string | null => {
+  const isBrowser = typeof window !== "undefined";
+  if(!isBrowser) return null;
   if(!unformatted) return null;
+  
   const formattedDate = new Date(
     (unformatted.seconds || unformatted._seconds || 0) * 1000
   );
-  const date =
-    formattedDate.getDate() +
-    "-" +
-    formattedDate.toLocaleString("en-US", { month: "short" });
+  
+  const language = localStorage.getItem('exkoLang') || 'UZ';
+  
+  const monthNames: Record<string, string[]> = {
+    UZ: ['Yan', 'Fev', 'Mar', 'Apr', 'May', 'Iyun', 'Iyul', 'Avg', 'Sen', 'Okt', 'Noy', 'Dek'],
+    RU: ['Янв', 'Фев', 'Мар', 'Апр', 'Май', 'Июн', 'Июл', 'Авг', 'Сен', 'Окт', 'Ноя', 'Дек'],
+    KR: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월']
+  };
+  
+  const monthIndex = formattedDate.getMonth();
+  const month = monthNames[language]?.[monthIndex] || monthNames['uz'][monthIndex];
+  
+  const date = formattedDate.getDate() + "-" + month;
 
   const time = formattedDate?.toLocaleTimeString("en-US", {
     hour: "2-digit",
@@ -124,3 +136,22 @@ export const autoPicture = async () => {
   const image = await images?.[randomNumber].image().then(promise => promise.default); 
   return image;
 };
+
+
+export const receiptHandler = (cart: CartItem, itemIndex: number) => {
+  const itemId = cart?.id;
+  const itemName = cart?.name;
+  const itemQuantity = cart?.quantity;
+  const itemDiscount = cart?.discount;
+  const itemColor = cart?.color;
+  const itemSize = cart?.size;
+
+  const receipt = `
+  ${itemIndex}.Product-name: ${itemName} (https://exko.uz/product/${itemId})\n
+  ${itemIndex}.Quantity: ${itemQuantity} * ${itemDiscount} = ${(itemQuantity * itemDiscount)?.toLocaleString("en-US", {  minimumFractionDigits: 2,}).split(".")[0].replaceAll(",", " ")} so'm\n
+  ${itemIndex}.Color: ${itemColor || "null"}\n
+  ${itemIndex}.Size: ${itemSize || "null"}\n
+  ${itemIndex}.Total-price: ${(itemQuantity * itemDiscount)?.toLocaleString("en-US", {minimumFractionDigits: 2,}).split(".")[0].replaceAll(",", " ")} so'm\n
+  `
+  return receipt
+}

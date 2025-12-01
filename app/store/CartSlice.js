@@ -12,6 +12,7 @@ const CartSlice = createSlice({
     wishes: [],
     results: [],
     edittedImage: [],
+    noAuthBuy: false,
 
     // ui and auth properties
     isLogged: false,
@@ -176,7 +177,10 @@ const CartSlice = createSlice({
     },
     setUser(state, action) {
       state.user = action.payload
-    }
+    },
+    setNoAuthBuy(state, action){
+      state.noAuthBuy = action.payload
+    } 
   },
 });
 

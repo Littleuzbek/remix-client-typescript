@@ -6,6 +6,7 @@ import { MdErrorOutline } from "react-icons/md";
 import { Product } from "~/utils";
 import { RootState } from "~/root";
 import { cartAction } from "~/store/CartSlice";
+import { translateText } from "../Extra/Translation";
 
 export default function Search() {
   const products = useSelector((state: RootState) => state.cart.products) as
@@ -51,7 +52,7 @@ export default function Search() {
         className="w-[25rem] h-[100%] rounded-[5px_0_0_5px] border-r-0 border border-[var(--first-color)] px-[10px] text-[18px] focus:outline-0"
         type="text"
         id="searchInput"
-        placeholder="Mahsulotlar izlash"
+        placeholder={translateText()?.headerSearchPlaceHolder}
         onKeyUp={searchEngine}
         ref={inpRef}
       />
