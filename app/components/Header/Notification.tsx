@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import { IoCloseOutline } from "react-icons/io5";
 import { RootState } from "~/root";
 import { CartItem } from "~/utils";
+import { translateText } from "../Extra/Translation";
 
 export default function Notification() {
   const [notific, setNotific] = useState(false);
@@ -69,13 +70,13 @@ export default function Notification() {
             <div className="w-[76%] mt-[.5rem]">
               <div className="w-full flex justify-between">
                 <p className="font-[500] text-[1.1rem]">
-                  {noAuthBuy ? "" : "Mahsulot savatga qo&apos;shildi."}
+                  {noAuthBuy ? "" : translateText()?.headerNotificationProductAdded}
                 </p>
                 <IoCloseOutline
                   onClick={() => setNotific(false)}
                   className="w-[1.5rem] h-[1.5rem] cursor-pointer mr-[10px]"
                 />
-              </div>
+              </div>  
               <div className="w-full flex flex-col">
                 <p className="w-[80%] text-[.9rem] line-clamp-2 text-ellipsis">
                   {noAuthBuy ? "Siz" : newItem?.name}
@@ -85,7 +86,7 @@ export default function Notification() {
                   className="no-underline self-end text-[var(--first-color)] mr-[10px] py-[10px]"
                   prefetch="intent"
                 >
-                  Savatga o&apos;tish
+                  {translateText()?.headerNotificationCartButton}
                 </Link>
                 {/* <Link
                   to="/cart"

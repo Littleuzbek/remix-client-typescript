@@ -4,6 +4,8 @@ const uzbekLang = {
     headerFavouriteButton: "Saralanganlar",
     headerLoginButton: "Kirish",
     headerCartButton: "Savat",
+    headerNotificationCartButton: "Savatga o'tish",
+    headerNotificationProductAdded: "Mahsulot savatga qo'shildi.",
 
     catalogElectronics: "Elektronika",
     catalogBooks: "Kitob",
@@ -113,6 +115,8 @@ const russianLang = {
     headerFavouriteButton: "Избранные",
     headerLoginButton: "Вход",
     headerCartButton: "Корзинка",
+    headerNotificationCartButton: "Перейти в корзину",
+    headerNotificationProductAdded: "Товар добавлен в корзину.",
 
     catalogElectronics: "Электроника",
     catalogBooks: "Книги",
@@ -223,6 +227,8 @@ const koreanLang = {
     headerFavouriteButton: "정렬됨",
     headerLoginButton: "로그인",
     headerCartButton: "바구니",
+    headerNotificationCartButton: "장바구니로 이동",
+    headerNotificationProductAdded: "상품이 장바구니에 담겼습니다.",
 
     catalogElectronics: "전자제품",
     catalogBooks: "책",
