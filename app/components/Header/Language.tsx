@@ -53,7 +53,7 @@ export default function Language() {
         <img src={currLang?.pic || globe} className="w-[30px] h-[30px] object-cover" alt="" />
         <h3>{currLang?.text}</h3>
       </div>
-      <div className="hidden flex-col absolute bg-[white] group-hover:flex">
+      <div className="hidden flex-col absolute bg-[white] group-hover:flex z-3">
         {langArr
           .filter((l) => l.text !== currLang?.text)
           .map((lang) => (
