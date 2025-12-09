@@ -12,10 +12,7 @@ import { autoPicture } from "../Extra/Extra";
 import { RootState } from "~/root";
 import { auth } from "~/firebase";
 import { UserData } from "~/utils";
-import { editLanguage, translateText } from "../Extra/Translation";
-import kr from "../../assets/lgKR.jpg";
-import uz from "../../assets/lgUZ.webp";
-import ru from "../../assets/lgRU.png";
+import { translateText } from "../Extra/Translation";
 import globe from "../../assets/globe.png";
 
 type langArray = {
@@ -23,13 +20,11 @@ type langArray = {
   text: string;
 };
 
-export default function MobileUser({ onNavigate }: { onNavigate: () => void }) {
+export default function MobileUser({ onNavigate, currLangVal, onSetDrop }: { currLangVal: langArray | null, onNavigate: () => void, onSetDrop: () => void }) {
   const userInfo = useSelector(
     (state: RootState) => state.cart.user
   ) as UserData | null;
   const [picture, setPicture] = useState<string | null>(null);
-  const [currLang, setCurrLang] = useState<langArray | null>(null);
-  const [drop, setDrop] = useState<boolean>(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -61,48 +56,13 @@ export default function MobileUser({ onNavigate }: { onNavigate: () => void }) {
       label: translateText()?.userControlSupport,
       navigation: `/user/${auth?.currentUser?.uid}/support`,
     },
-  ];
-
-  const langArr = [
-    {
-      pic: uz,
-      text: "UZ",
-    },
-    {
-      pic: kr,
-      text: "KR",
-    },
-    {
-      pic: ru,
-      text: "RU",
-    },
-  ];
-
-  function setDefaultLanguageAction() {
-    const savedLanguage = localStorage?.getItem("exkoLang");
-    if (savedLanguage === null) {
-      localStorage.setItem("exkoLang", "UZ");
-    } else {
-      if (savedLanguage === "UZ") return setCurrLang(langArr[0]);
-      if (savedLanguage === "KR") return setCurrLang(langArr[1]);
-      if (savedLanguage === "RU") return setCurrLang(langArr[2]);
-    }
-  }
-
-  const LanguageHandler = (lang: langArray) => {
-    editLanguage(lang.text);
-    setCurrLang(lang);
-  };
-
-  useEffect(() => {
-    setDefaultLanguageAction();
-  }, []);
+  ];  
 
   return (
     <div className="flex flex-col fixed z-3 top-[0] left-[0] right-[0] bottom-[0] bg-[white]">
       <div className="w-full h-fit py-[10px] flex flex-col items-center justify-center">
         <img src={picture || ""} alt="" className="w-[13rem] h-[13rem]" />
-        <h1 className="text-[var(--first-color)]">{userInfo?.name || "..."}</h1>
+        <h1 className="max-w-[90%] text-[var(--first-color)] text-2xl font-bold">{userInfo?.name || "..."}</h1>
       </div>
 
       <div className="grid grid-cols-2 gap-[5px]">
@@ -121,39 +81,13 @@ export default function MobileUser({ onNavigate }: { onNavigate: () => void }) {
             {key.label}
           </button>
         ))}
-        <button className="h-[6rem] flex flex-col items-center justify-center gap-[5px] text-[18px] border-none bg-transparent text-[black]" onClick={()=> setDrop(!drop)}>
+        <button className="h-[6rem] flex flex-col items-center justify-center gap-[5px] text-[18px] border-none bg-transparent text-[black]" onClick={()=> onSetDrop()}>
           <img
-            src={currLang?.pic || globe}
+            src={currLangVal?.pic || globe}
             alt=""
             className="w-[30px] h-[30px] object-cover"
           />
-          {currLang?.text}
-          {drop && <div className="flex flex-col justify-center items-center absolute inset-px  bg-[white]">
-            <button
-                  className="flex gap-[.5rem] p-[1rem] items-center hover:bg-[var(--first-color)] hover:p-[5px] hover:text-[white] duration-300 rounded-[5px] border-none bg-transparent"
-                  key="close"
-                  onClick={() => setDrop(false)}
-                >
-                  <X />
-                  <h2>{translateText()?.userControlLangClose}</h2>
-                </button>
-            {langArr
-              .filter((l) => l.text !== currLang?.text)
-              .map((lang) => (
-                <button
-                  className="flex gap-[.5rem] p-[1rem] items-center hover:bg-[var(--first-color)] hover:p-[5px] hover:text-[white] duration-300 rounded-[5px] border-none bg-transparent"
-                  key={lang.text}
-                  onClick={() => LanguageHandler(lang)}
-                >
-                  <img
-                    src={lang.pic}
-                    className="w-[60px] h-[60px] object-cover"
-                    alt=""
-                  />
-                  <h2>{lang.text}</h2>
-                </button>
-              ))}
-          </div>}
+          {currLangVal?.text}
         </button>
         <button className="h-[6rem] flex flex-col items-center justify-center gap-[5px] text-[18px] border-none bg-transparent text-[black]">
           <ArrowLeftToLine /> {translateText()?.userControlExit}

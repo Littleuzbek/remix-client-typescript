@@ -5,7 +5,6 @@ import { loader } from "./root";
 import { cartAction } from "./store/CartSlice";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
-import Scrollup from "./components/Extra/ScrollUp";
 import CartBtn from "./components/Cart/CartBtn";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./firebase";
@@ -105,7 +104,6 @@ export default function AppShell({ children }: Props) {
         <Header />
         {children}
         <Footer />
-        <Scrollup />
         <CartBtn />
       </div>
     </>

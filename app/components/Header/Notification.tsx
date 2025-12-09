@@ -69,7 +69,7 @@ export default function Notification() {
             />
             <div className="w-[76%] mt-[.5rem]">
               <div className="w-full flex justify-between">
-                <p className="font-[500] text-[1.1rem]">
+                <p className="font-semibold text-sm md:text-base lg:text-lg">
                   {noAuthBuy ? "" : translateText()?.headerNotificationProductAdded}
                 </p>
                 <IoCloseOutline
@@ -78,7 +78,7 @@ export default function Notification() {
                 />
               </div>  
               <div className="w-full flex flex-col">
-                <p className="w-[80%] text-[.9rem] line-clamp-2 text-ellipsis">
+                <p className="w-[80%] text-sm md:text-base lg:text-lg line-clamp-2 text-ellipsis">
                   {noAuthBuy ? "Siz" : newItem?.name}
                 </p>
                 <Link

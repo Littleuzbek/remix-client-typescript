@@ -79,7 +79,7 @@ export default function ItemMobile({ product }: { product: CartItem }) {
       <div className="w-full flex items-center justify-between border-b-3 border-[black] pb-[1rem] mb-[1rem]">
         <div className="flex items-center justify-center w-[8rem] h-[3rem] border-1 border-[#a0a0a0] rounded-[5px]">
           <button
-            className="w-[35%] bg-transparent border-none cursor-pointer"
+            className="w-[35%] bg-transparent border-none cursor-pointer grid place-items-center"
             style={
               product?.quantity === 1
                 ? {
@@ -94,7 +94,7 @@ export default function ItemMobile({ product }: { product: CartItem }) {
           </button>
           <p className="w-[30%] text-center">{product?.quantity || 1}</p>
           <button
-            className="w-[35%] bg-transparent border-none cursor-pointer"
+            className="w-[35%] bg-transparent border-none cursor-pointer grid place-items-center"
             onClick={() => amountHandler("+")}
           >
             <FaPlus className="text-[black]" />

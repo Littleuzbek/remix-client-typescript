@@ -5,6 +5,7 @@
 @theme {
   --breakpoint-middle: 62rem;
 }
+@import "tailwindcss";
 
 :root {
   --bg-font-all: 18px;

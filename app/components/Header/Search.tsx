@@ -47,7 +47,7 @@ export default function Search() {
   };
 
   return (
-    <div className="w-full middle:w-auto h-[2.5rem] flex items-center relative">
+    <div className="w-full middle:w-auto h-[2.5rem] flex items-center relative bg-white">
       <input
         className="w-[25rem] h-[100%] rounded-[5px_0_0_5px] border-r-0 border border-[var(--first-color)] px-[10px] text-[18px] focus:outline-0"
         type="text"
