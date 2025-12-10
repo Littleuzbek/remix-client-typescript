@@ -8,12 +8,12 @@ import {
   ShoppingBag,
   X,
 } from "lucide-react";
-import { autoPicture } from "../Extra/Extra";
+import { autoPicture } from "../../Extra/Extra";
 import { RootState } from "~/root";
 import { auth } from "~/firebase";
 import { UserData } from "~/utils";
-import { translateText } from "../Extra/Translation";
-import globe from "../../assets/globe.png";
+import { translateText } from "../../Extra/Translation";
+import globe from "../../../assets/globe.png";
 
 type langArray = {
   pic: string | undefined;

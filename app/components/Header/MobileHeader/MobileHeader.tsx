@@ -12,10 +12,10 @@ import {
 } from "lucide-react";
 import MobileUser from "./MobileUser";
 // import { auth } from "~/firebase";
-import uzFlag from "../../assets/lgUZ.webp";
-import ruFlag from "../../assets/lgRU.png";
-import krFlag from "../../assets/lgKR.jpg";
-import { editLanguage, translateText } from "../Extra/Translation";
+import MobileLanguage from "./MobileLanguage";
+import uzFlag from "../../../assets/lgUZ.webp";
+import ruFlag from "../../../assets/lgRU.png";
+import krFlag from "../../../assets/lgKR.jpg";
 
 type langArray = {
   pic: string | undefined;
@@ -56,7 +56,7 @@ const MobileHeader = () => {
     },
   ];
 
-  const langArr = [
+ const langArr = [
     {
       pic: uzFlag,
       text: "UZ",
@@ -130,7 +130,7 @@ const MobileHeader = () => {
     });
   }, [open]);
 
-  function setDefaultLanguageAction() {
+ function setDefaultLanguageAction() {
     const savedLanguage = localStorage?.getItem("exkoLang");
     if (savedLanguage === null) {
       localStorage.setItem("exkoLang", "UZ");
@@ -141,16 +141,11 @@ const MobileHeader = () => {
     }
   }
 
-  const LanguageHandler = (lang: langArray) => {
-    editLanguage(lang.text);
-    setCurrLang(lang);
-  };
-
   useEffect(() => {
-    setDefaultLanguageAction();
-  }, []);
+   setDefaultLanguageAction();
+ }, []);
 
-  return (
+    return (
     <div className="lg:hidden">
       {open && (
         <button
@@ -187,7 +182,7 @@ const MobileHeader = () => {
               }}
             >
               {index === 3 ? (
-                <img src={uzFlag} alt="" className="size-6 text-white" />
+                <img src={currLang?.pic} alt="" className="size-6 text-white object-contain" />
               ) : (
                 <ItemIcon
                   className={`${isOuter ? "size-5" : "size-6"} text-white`}
@@ -213,32 +208,7 @@ const MobileHeader = () => {
 
       {userMenu && <MobileUser currLangVal={currLang} onSetDrop={()=> setDrop(true)} onNavigate={() => setUserMenu(false)} />}
         
-      {drop && <div className="flex flex-col justify-center items-center fixed z-4 inset-0  bg-white">
-          <button
-            className="flex gap-[.5rem] p-[1rem] items-center hover:bg-[var(--first-color)] hover:p-[5px] hover:text-[white] duration-300 rounded-[5px] border-none bg-transparent"
-            key="close"
-            onClick={() => setDrop(false)}
-          >
-            <X />
-            <h2>{translateText()?.userControlLangClose}</h2>
-          </button>
-          {langArr
-            .filter((l) => l.text !== currLang?.text)
-            .map((lang) => (
-              <button
-                className="flex gap-[.5rem] p-[1rem] items-center hover:bg-[var(--first-color)] hover:p-[5px] hover:text-[white] duration-300 rounded-[5px] border-none bg-transparent"
-                key={lang.text}
-                onClick={() => LanguageHandler(lang)}
-              >
-                <img
-                  src={lang.pic}
-                  className="w-[60px] h-[60px] object-cover"
-                  alt=""
-                />
-                <h2>{lang.text}</h2>
-              </button>
-            ))}
-        </div>}
+      {drop && <MobileLanguage onCurrLang={setCurrLang} onSetDrop={() => setDrop(false)} currLangVal={currLang} />}
     </div>
   );
 };

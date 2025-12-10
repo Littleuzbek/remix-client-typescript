@@ -5,7 +5,7 @@ import Search from "./Search";
 import User from "./User";
 import SearchResult from "./SearchResult";
 import MobileSearch from "./MobileSearch";
-import MobileHeader from "./MobileHeader";
+import MobileHeader from "./MobileHeader/MobileHeader";
 import Notification from "./Notification";
 import { translateText } from "../Extra/Translation";
 import Language from "./Language";
