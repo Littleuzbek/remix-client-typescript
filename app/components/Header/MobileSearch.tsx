@@ -11,7 +11,7 @@ export default function MobileSearch() {
   const inProduct = pathname?.includes("/product");
   return (
     <div
-      className="w-full h-[3rem] py-[.2rem] px-[10px] fixed top-[0] right-[0] z-2 flex middle:hidden"
+      className="w-full h-[3rem] py-[.2rem] px-[10px] fixed top-[0] right-[0] z-2 flex lg:hidden"
       style={
         inProduct || searchResults?.length !== 0
           ? { backgroundColor: "white" }

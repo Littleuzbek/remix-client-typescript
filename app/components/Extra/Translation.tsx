@@ -6,7 +6,7 @@ const uzbekLang = {
     headerCartButton: "Savat",
     headerNotificationCartButton: "Savatga o'tish",
     headerNotificationProductAdded: "Mahsulot savatga qo'shildi.",
-
+    
     catalogElectronics: "Elektronika",
     catalogBooks: "Kitob",
     catalogChildClothes: "Bolalar kiyimi",
@@ -21,6 +21,9 @@ const uzbekLang = {
     catalogToys: "O'yinchoq",
     catalogWatches: "Soat",
     catalogBU: "B/U",
+    
+    searchResultNotFound: "Hech narsa topilmadi",
+    searchResultTitle: "Qidiruv natijalari",
 
     productShowMoreButton: "Yana ko'rsatish",
 
@@ -117,7 +120,7 @@ const russianLang = {
     headerCartButton: "Корзинка",
     headerNotificationCartButton: "Перейти в корзину",
     headerNotificationProductAdded: "Товар добавлен в корзину.",
-
+    
     catalogElectronics: "Электроника",
     catalogBooks: "Книги",
     catalogChildClothes: "Детская одежда",
@@ -132,6 +135,9 @@ const russianLang = {
     catalogToys: "Игрушки",
     catalogWatches: "Часы",
     catalogBU: "B/U",
+    
+    searchResultNotFound: "Ничего не найдено",
+    searchResultTitle: "Результаты поиска",
 
     productShowMoreButton: "Показать больше",
 
@@ -229,7 +235,7 @@ const koreanLang = {
     headerCartButton: "바구니",
     headerNotificationCartButton: "장바구니로 이동",
     headerNotificationProductAdded: "상품이 장바구니에 담겼습니다.",
-
+    
     catalogElectronics: "전자제품",
     catalogBooks: "책",
     catalogChildClothes: "아동복",
@@ -244,9 +250,12 @@ const koreanLang = {
     catalogToys: "장난감",
     catalogWatches: "시계",
     catalogBU: "B/U",
-
+    
+    searchResultNotFound: "결과를 찾을 수 없습니다",
+    searchResultTitle: "검색 결과",
+    
     productShowMoreButton: "더 보기",
-
+    
     footerPartnership: "협력을 위해",
     footerRightsMessage: "© EXKO. 모든 권리 보유",
 

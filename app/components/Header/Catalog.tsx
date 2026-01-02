@@ -40,7 +40,7 @@ export default function Catalog() {
         <span className="w-full h-full absolute z-0 left-[0px] bg-[var(--first-color-light)] header-catalog-btn-container-animation"></span>
         <button
           onClick={() => setToggle(!toggle)}
-          className="header-catalog-btn flex items-center gap-[5px] rounded-[5px] bg-[var(--first-color)] text-[18px] text-[white] p-[0.5rem_1.5rem] relative z-1 cursor-pointer border-none bg-[transparent] select-none transition-all duration-300 hover:bg-[var(--first-color-light)] border-0"
+          className="header-catalog-btn flex items-center gap-[5px] rounded-[5px] bg-[var(--first-color)] text-[18px] text-[white] p-[0.3rem_1.2rem] relative z-1 cursor-pointer border-none bg-[transparent] select-none transition-all duration-300 hover:bg-[var(--first-color-light)] border-0"
         >
           <span className="header-catalog-icon w-[20px] h-[20px] flex flex-col justify-evenly relative">
             <div

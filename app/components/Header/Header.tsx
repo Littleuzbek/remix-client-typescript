@@ -14,9 +14,9 @@ export default function Header() {
   const { pathname } = useLocation();
   
   return (
-    <div className="w-full fixed bottom-[0] z-3 bg-[white] middle:static middle:bg-transparent">
-      <header className="navbar w-[90%] h-[4rem] bg-[var(--second-color)] m-[10px_auto_0] rounded-[10px]  justify-evenly items-center hidden middle:flex">
-        <Link to={"/"} className='text-[2rem] font-["Playfair_Display",serif] [font-optical-sizing:auto] not-italic font-semibold text-[var(--first-color)] select-none cursor-pointer font-[600] no-underline'>
+    <div className="w-full fixed bottom-[0] z-3 bg-[white] lg:static lg:bg-transparent">
+      <header className="navbar w-[90%] h-[4rem] bg-[var(--second-color)] m-[10px_auto_0] rounded-[10px]  justify-evenly items-center hidden lg:flex">
+        <Link to={"/"} className='text-[1.5rem] font-["Playfair_Display",serif] [font-optical-sizing:auto] not-italic font-semibold text-[var(--first-color)] select-none cursor-pointer font-[600] no-underline'>
           EXKO
         </Link>
         <Catalog />
@@ -26,7 +26,7 @@ export default function Header() {
         <User />
       </header>
 
-      <ul className="navbar2 w-[90%] justify-evenly m-[10px_auto] list-none hidden middle:flex">
+      <ul className="navbar2 w-[90%] justify-evenly m-[10px_auto] list-none hidden lg:flex">
         <li
           className={
             `${pathname && pathname?.includes("/electronics") ? "bg-[var(--first-color)]" : ""} p-[5px] rounded-[5px]`

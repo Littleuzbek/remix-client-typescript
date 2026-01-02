@@ -14,7 +14,7 @@ export const meta: MetaFunction = () => {
 export default function Index() {
   const products = useSelector((state: RootState) => state.cart.products) as Product[] | null;
   return (
-    <div className="home-page w-[95%] middle:w-[90%] m-[0_auto]">
+    <div className="home-page w-[95%] m-[0_auto]">
       <Home data={products} />
     </div>
   );

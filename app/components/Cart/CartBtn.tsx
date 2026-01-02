@@ -8,7 +8,7 @@ export default function CartBtn() {
   const { pathname } = useLocation();
   const navigate = useNavigate();
   const cartBtnStyle =
-    "hidden middle:grid place-items-center fixed z-1 right-[2.5rem] bottom-[2rem] p-[.8rem] bg-[var(--first-color)] rounded-[.4rem] duration-500 cursor-pointer";
+    "hidden lg:grid place-items-center fixed z-1 right-[2.5rem] bottom-[2rem] p-[.8rem] bg-[var(--first-color)] rounded-[.4rem] duration-500 cursor-pointer";
   return (
     <div
       className={pathname?.includes("/cart") ? "hidden" : cartBtnStyle}

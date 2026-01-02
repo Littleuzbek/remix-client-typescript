@@ -20,7 +20,7 @@ export default function Search() {
   const dispatch = useDispatch();
 
   const searchEngine = (
-    content: React.KeyboardEvent<HTMLInputElement>
+    content: React.ChangeEvent<HTMLInputElement>
   ): void => {
     const target = content.target as HTMLInputElement;
     const value = target.value;
@@ -29,6 +29,7 @@ export default function Search() {
       dispatch(cartAction.setResults([]));
       setResult(false);
     } else {
+      console.log(value?.trim().length);
       if (value?.trim().length > 2) {
         const find = products?.filter((item) =>
           (item?.title?.toLowerCase() || item?.name?.toLowerCase())?.includes(
@@ -41,19 +42,20 @@ export default function Search() {
       }
 
       if (value?.trim().length <= 2) {
-        return setResult(true);
+        dispatch(cartAction.setResults([]));
+        return setResult(false);
       }
     }
   };
 
   return (
-    <div className="w-full middle:w-auto h-[2.5rem] flex items-center relative bg-white">
+    <div className="w-full lg:w-auto h-[2.5rem] flex items-center relative bg-white">
       <input
-        className="w-[25rem] h-[100%] rounded-[5px_0_0_5px] border-r-0 border border-[var(--first-color)] px-[10px] text-[18px] focus:outline-0"
+        className="w-full lg:w-[20rem] h-[100%] rounded-[5px_0_0_5px] border-r-0 border border-[var(--first-color)] px-[10px] text-[18px] focus:outline-0"
         type="text"
         id="searchInput"
         placeholder={translateText()?.headerSearchPlaceHolder}
-        onKeyUp={searchEngine}
+        onChange={searchEngine}
         ref={inpRef}
       />
       <button
@@ -70,8 +72,8 @@ export default function Search() {
       </button>
 
       {result && (
-        <span className="no-result w-[25rem] py-[10px] bg-[white] text-[red] text-[18px] border-2 border-[var(--first-color)] border-t-0 rounded-[0_0_10px_10px] absolute z-[4] top-[100%] flex items-center justify-center gap-[.1rem]">
-          Hech narsa topilmadi <MdErrorOutline />
+        <span className="no-result w-full lg:w-[25rem] py-[10px] bg-[white] text-[red] text-[18px] border-2 border-[var(--first-color)] border-t-0 rounded-[0_0_10px_10px] absolute z-[4] top-[100%] flex items-center justify-center gap-[.1rem]">
+          {translateText()?.searchResultNotFound} <MdErrorOutline />
         </span>
       )}
     </div>

@@ -5,7 +5,7 @@ import { Product } from "~/utils";
 import { translateText } from "../Extra/Translation";
 
 type CollectionProps = {
-  section?: string;
+  section?: string | string[];
   all: Product[] | null;
   scroll?: true;
 };
@@ -16,8 +16,8 @@ export default function Collection({ all, scroll, section }: CollectionProps) {
 
   return (
     <>
-      <h2 className="my-[1rem] text-[1.5rem] middle:text-[2rem]">{section || ""}</h2>
-      <div className="w-full grid grid-cols-2 middle:grid-cols-5 gap-[1rem] pb-[1rem]">
+      <h2 className="my-[1rem] text-[1.5rem] lg:text-[2rem]">{section || ""}</h2>
+      <div className="w-full grid grid-cols-2 lg:grid-cols-5 gap-[1rem] pb-[1rem]">
         {all ? (
           (scroll ? visibleProducts : all || [])?.map((item: Product, i: number) => (
             <Card
@@ -49,7 +49,7 @@ export default function Collection({ all, scroll, section }: CollectionProps) {
 
         {scroll && (
           <button
-            className="py-[1rem] rounded-[10px] text-[22px] border-none bg-[var(--second-color)] text-[black] duration-500 cursor-pointer col-start-1 col-end-3 middle:col-start-2 middle:col-end-5 hover:bg-[#e7e8e9]"
+            className="py-[1rem] rounded-[10px] text-[22px] border-none bg-[var(--second-color)] text-[black] duration-500 cursor-pointer col-start-1 col-end-3 lg:col-start-2 lg:col-end-5 hover:bg-[#e7e8e9]"
             onClick={() => {
               setMore(more + 10);
             }}

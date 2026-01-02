@@ -1,4 +1,3 @@
-// import { LoaderFunctionArgs } from "@remix-run/node";
 import {
   ClientLoaderFunctionArgs,
   data,
@@ -19,7 +18,7 @@ export const clientLoader = async ({ params }: ClientLoaderFunctionArgs) => {
       category: "electronics",
       title: translateText()?.catalogElectronics,
     },
-    { path: "books", category: "books", title: "Kitoblar" },
+    { path: "books", category: "books", title: translateText()?.catalogBooks },
     {
       path: "kidsClothes",
       category: "kidsClothes",
@@ -33,9 +32,7 @@ export const clientLoader = async ({ params }: ClientLoaderFunctionArgs) => {
     {
       path: "clothes",
       category: "clothes",
-      title: translateText()?.catalogWomanClothes,
-      title2: translateText()?.catalogMenClothes,
-      title3: translateText()?.catalogChildClothes,
+      title: translateText()?.catalogClothes,
     },
     {
       path: "menClothes",
@@ -77,13 +74,13 @@ export default function Category() {
         all={
           products?.filter(
             (sortingItems: Product) =>
-              foundCategory?.category === sortingItems.proType
+              (foundCategory?.category === "clothes") ? 
+            sortingItems?.proType?.toLowerCase().includes("clothes") : 
+            foundCategory?.category === sortingItems.proType
           ) || null
         }
         section={
-          foundCategory?.category === "clothes"
-            ? "Ayollar kiyimlari"
-            : foundCategory?.title
+          foundCategory?.title  
         }
       />
     </div>

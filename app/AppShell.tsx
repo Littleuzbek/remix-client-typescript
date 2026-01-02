@@ -100,7 +100,7 @@ export default function AppShell({ children }: Props) {
         .font-fixed {
           font-family: ${fontType} sans-serif !important;
           `}</style>
-      <div className="w-full h-full mt-[3rem] middle:mt-[0] font-fixed">
+      <div className="w-full h-full mt-[3rem] lg:mt-[0] font-fixed">
         <Header />
         {children}
         <Footer />
