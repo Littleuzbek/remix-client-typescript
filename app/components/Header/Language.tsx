@@ -58,7 +58,7 @@ export default function Language() {
           .filter((l) => l.text !== currLang?.text)
           .map((lang) => (
             <button
-              className="flex gap-[.5rem] items-center hover:bg-[var(--first-color)] hover:p-[5px] hover:text-[white] duration-300 rounded-[5px] border-none bg-transparent"
+              className="flex gap-[.5rem] items-center hover:bg-[var(--first-color)] hover:scale-[1.2] p-[5px] hover:text-[.7rem]  hover:text-[white] duration-300 rounded-[5px] border-none bg-transparent"
               key={lang.text}
               onClick={() => LanguageHandler(lang)}
             >

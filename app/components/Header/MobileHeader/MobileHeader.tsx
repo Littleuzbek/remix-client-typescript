@@ -184,9 +184,14 @@ const MobileHeader = () => {
               {index === 3 ? (
                 <img src={currLang?.pic} alt="" className="size-6 text-white object-contain" />
               ) : (
+                <div className="relative">
+                <div className={`${item.label !== "Cart" ? 
+                  "hidden" : "text-bold text-white absolute top-[-15px] right-0 left-0"
+                }`}>1</div>
                 <ItemIcon
                   className={`${isOuter ? "size-5" : "size-6"} text-white`}
-                />
+                  />
+                </div>
               )}
             </button>
           );
