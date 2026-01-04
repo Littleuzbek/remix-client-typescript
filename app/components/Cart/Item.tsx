@@ -85,7 +85,7 @@ export default function Item({ product }: { product: CartItem }) {
 
             <div className="w-[20%] max-h-[2.3rem] flex justify-center items-center border-1 border-[#a0a0a0] rounded-[20px]">
               <button
-                className="w-[35%] bg-transparent border-none cursor-pointer"
+                className="w-[35%] bg-transparent border-none cursor-pointer grid place-items-center"
                 style={
                   product.quantity === 1
                     ? {
@@ -100,7 +100,7 @@ export default function Item({ product }: { product: CartItem }) {
               </button>
               <p className="w-[30%] text-center">{product?.quantity || 1}</p>
               <button
-                className="w-[35%] bg-transparent border-none cursor-pointer"
+                className="w-[35%] bg-transparent border-none cursor-pointer grid place-items-center"
                 onClick={() => amountHandler("+")}
               >
                 <FaPlus className="p-[.1rem]" />

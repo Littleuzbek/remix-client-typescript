@@ -9,6 +9,7 @@ import ShoppingDetails from "./ShoppingDetails";
 import RelatedProducts from "./RelatedProducts";
 import { ProductShuffler } from "../Extra/Extra";
 import Viewer from "../Extra/Viewer";
+import { translateText } from "../Extra/Translation";
 
 export default function Product({
   productId,
@@ -42,7 +43,7 @@ export default function Product({
         onClick={() => window?.history?.state.idx > 0 ? navigate(-1) : navigate("/")}
       >
         <h2 className="w-fit mt-[2rem] mx-auto mb-0 cursor-pointer text-[1.5rem]">
-            <IoMdArrowRoundBack /> Ortga
+            <IoMdArrowRoundBack /> {translateText()?.productBackButton}
         </h2>
       </button>
       <div className="w-[95%] middle:w-[90%] flex flex-col middle:flex-row rounded-[20px] my-[2rem] mx-auto">

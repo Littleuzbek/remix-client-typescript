@@ -110,6 +110,19 @@ const uzbekLang = {
     nasiyaMonth: "oy",
     nasiyaMonthly: "oyiga",
     nasiyaFirstPayment: "Birinchi to'lov vaqti: Hozir",
+
+    productSeller: "Sotuvchi",
+    productAmount: "Miqdor",
+    productInstallmentPeriod: "12 oy muddatli to'lov",
+    productAddButton: "Savatga qo'shish", 
+    productGoToButton: "Xarid qilish",
+    productDescription: "Mahsulot haqida qisqacha",
+    productMobileAddButton: "Savatga",
+    productMobileGoToButton: "O'tish",
+    productMonthLabel: "Oyiga",
+    productPriceLabel: "Narx",
+    productRelatedTitle: "O'xshash mahsulotlar",
+    productBackButton: "Ortga",
 }
 
 const russianLang = {
@@ -225,6 +238,19 @@ const russianLang = {
     nasiyaMonth: "мес.",
     nasiyaMonthly: "в месяц",
     nasiyaFirstPayment: "Срок первого платежа: Сейчас",
+
+    productSeller: "Продавец",
+    productAmount: "Количество",
+    productInstallmentPeriod: "Рассрочка на 12 месяцев", 
+    productAddButton: "Добавить в корзину", 
+    productGoToButton: "Купить",
+    productDescription: "Коротко о товаре",
+    productMobileAddButton: "В корзину",
+    productMobileGoToButton: "Перейти",
+    productMonthLabel: "В месяц",
+    productPriceLabel: "Цена",
+    productRelatedTitle: "Похожие товары",
+    productBackButton: "Назад",
 }
 
 const koreanLang = {
@@ -339,6 +365,19 @@ const koreanLang = {
     nasiyaMonth: "개월",
     nasiyaMonthly: "개월당",
     nasiyaFirstPayment: "첫 납부 예정일: 지금",
+
+    productSeller: "판매자",
+    productAmount: "수량",
+    productInstallmentPeriod: "12개월 할부",
+    productAddButton: "장바구니에 담기", 
+    productGoToButton: "구매하기",
+    productDescription: "제품 개요",
+    productMobileAddButton: "장바구니에 담기",
+    productMobileGoToButton: "이동",
+    productMonthLabel: "월",
+    productPriceLabel: "가격",
+    productRelatedTitle: "유사한 제품",
+    productBackButton: "뒤로",
 }
 
 function translateText() {

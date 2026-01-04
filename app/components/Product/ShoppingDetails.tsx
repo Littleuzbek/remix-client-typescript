@@ -8,6 +8,7 @@ import { RootState } from "~/root";
 import { FaShoppingCart } from "react-icons/fa";
 import AmountHandler from "./ShoppingDetails/AmountHandler";
 import Options from "./ShoppingDetails/Options";
+import { translateText } from "../Extra/Translation";
 
 export default function ShoppingDetails({
   productDetails,
@@ -83,7 +84,7 @@ export default function ShoppingDetails({
                   </div>
                 </div> */}
         <p className="w-full flex text-[1.1rem] mt-[.5rem] mb-[1rem]">
-          Sotuvchi: <q className="ml-[2rem] text-[.95rem]">EXKO shop</q>
+          {translateText()?.productSeller}: <q className="ml-[2rem] text-[.95rem]">EXKO shop</q>
         </p>
         <Options
           productDetails={productDetails}
@@ -96,32 +97,33 @@ export default function ShoppingDetails({
       </div>
       <div className="hidden middle:block w-full my-[.5rem]">
         {/* <p>{translateText().price}:</p> */}
-        <p className="text-[1rem] font-[500]">Narx:</p>
+        <p className="text-[1rem] font-[500]">{translateText()?.productPriceLabel
+          }:</p>
         <div className="flex items-center gap-[1rem] my-[.5rem]">
           <p className="text-[1.5rem] font-[600]">
             {PriceFormatter(
               (productDetails?.discount || productDetails?.price) * quantity
             )}{" "}
-            so&apos;m
+            {translateText()?.orderPrice_currency}
           </p>
           <s>
             {PriceFormatter(
               (productDetails?.price || productDetails?.oldPrice || 0) *
                 quantity
             )}{" "}
-            so&apos;m
+            {translateText()?.orderPrice_currency}
           </s>
         </div>
       </div>
       <p className="mt-[1rem] middle:mt-[2rem] px-[1rem] h-[2.5rem] rounded-[10px] bg-[var(--credit-background)] text-[.9rem] flex items-center gap-[.3rem] duration-300 cursor-pointer ">
         <span className="bg-[var(--credit-number-background)] rounded-[20px] py-[3px] px-[5px] mr-[10px]">
-          Oyiga{" "}
+          {translateText()?.productMonthLabel}{" "}
           {PriceFormatter(
             (productDetails?.discount || productDetails?.price || 0) / 12
           )}{" "}
-          so&apos;mdan
+          {translateText()?.orderPrice_currency}
         </span>
-        12 oy muddatli to&apos;lov
+        {translateText()?.productInstallmentPeriod}
       </p>
       <div className="hidden middle:flex w-full h-[3rem] items-center justify-evenly my-[1rem]">
         <button
@@ -130,15 +132,13 @@ export default function ShoppingDetails({
             addToCart();
           }}
         >
-          Savatga qo&apos;shish
-          {/* {translateText().addToCartBtn} */}
+          {translateText()?.productAddButton}
         </button>
         <button
           className="w-[45%] h-full text-[1.15rem] rounded-[10px] border-2 border-[var(--first-color)] bg-[white] cursor-pointer duration-300 text-[var(--first-color)]"
           onClick={() => buyItem()}
         >
-          {/* {translateText().buyBtn} */}
-          Xarid qilish
+          {translateText()?.productGoToButton}
         </button>
       </div>
       <div
@@ -146,7 +146,7 @@ export default function ShoppingDetails({
         style={productDetails?.specs ? {} : { display: "none" }}
       >
         {/* <p>{translateText().aboutPro}:</p> */}
-        <p className="text-[1.3rem] mb-[.5rem]">Mahsulot haqida qisqacha:</p>
+        <p className="text-[1.3rem] mb-[.5rem]">{translateText()?.productDescription}:</p>
         <p className="text-[1rem]">{productDetails?.specs}</p>
       </div>
 
@@ -156,13 +156,13 @@ export default function ShoppingDetails({
             {PriceFormatter(
               (productDetails?.discount || 0) * (quantityForMobile || 1)
             )}{" "}
-            so&apos;m
+            {translateText()?.orderPrice_currency}
           </p>
-          {quantityForMobile && <p>quantity: {quantityForMobile}</p>}
+          {quantityForMobile && <p>{translateText()?.productAmount}: {quantityForMobile}</p>}
           {quantityForMobile !>= 1 || (
             <s>
               {PriceFormatter(productDetails?.price * (quantityForMobile || 1))}{" "}
-              so&apos;m
+              {translateText()?.orderPrice_currency}
             </s>
           )}
         </div>
@@ -171,11 +171,11 @@ export default function ShoppingDetails({
             + 1
           </button>
         )}
-        {inCart && <button className="bg-[var(--first-color)] border-none py-[.7rem] px-[2rem] mr-[.5rem] text-[white] text-[1rem] rounded-[10px]" onClick={() => addToCart()}>Savatga</button>}
+        {inCart && <button className="bg-[var(--first-color)] border-none py-[.7rem] px-[2rem] mr-[.5rem] text-[white] text-[1rem] rounded-[10px]" onClick={() => addToCart()}>{translateText()?.productMobileAddButton}</button>}
         {inCart || (
           <Link to={"/cart"} className="border-1 border-[var(--first-color)] py-[.6rem] px-[1rem] mr-[.5rem] text-[var(--first-color)] rounded-[10px] font-[550] no-underline flex items-center gap-[.5rem]">
             <FaShoppingCart />
-            O&apos;tish
+            {translateText()?.productMobileGoToButton}
           </Link>
         )}
       </div>
