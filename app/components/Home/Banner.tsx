@@ -8,6 +8,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar"
+import MobileCategory from "../Header/MobileHeader/MobileCategory"
 
 export default function Banner() {
   const bannerImages = [Image1, Image2, Image3, Image4];
@@ -31,6 +32,8 @@ export default function Banner() {
           </SwiperSlide>
         ))}
       </Swiper>
+
+      <MobileCategory />
     </div>
   );
 }
