@@ -16,6 +16,8 @@ import MobileLanguage from "./MobileLanguage";
 import uzFlag from "../../../assets/lgUZ.webp";
 import ruFlag from "../../../assets/lgRU.png";
 import krFlag from "../../../assets/lgKR.jpg";
+import { useSelector } from "react-redux";
+import { RootState } from "~/root";
 
 type langArray = {
   pic: string | undefined;
@@ -30,6 +32,7 @@ const MobileHeader = () => {
   const menuRef = useRef<HTMLDivElement>(null);
   const Icon = open ? X : Menu;
   const navigate = useNavigate();
+  const cart = useSelector((state: RootState) => state.cart.cart);
 
   const menuItems = [
     {
@@ -143,6 +146,7 @@ const MobileHeader = () => {
 
   useEffect(() => {
    setDefaultLanguageAction();
+   // eslint-disable-next-line
  }, []);
 
     return (
@@ -185,9 +189,9 @@ const MobileHeader = () => {
                 <img src={currLang?.pic} alt="" className="size-6 text-white object-contain" />
               ) : (
                 <div className="relative">
-                <div className={`${item.label !== "Cart" ? 
-                  "hidden" : "text-bold text-white absolute top-[-15px] right-0 left-0"
-                }`}>1</div>
+                <div className={`${(item.label === "Cart" && cart?.length) ? 
+                  "text-bold text-white absolute top-[-15px] right-0 left-0" : "hidden"
+                }`}>{cart?.length}</div>
                 <ItemIcon
                   className={`${isOuter ? "size-5" : "size-6"} text-white`}
                   />
@@ -201,8 +205,9 @@ const MobileHeader = () => {
           className="size-14 bg-[var(--first-color)] rounded-full grid place-items-center relative z-10 shadow-xl transition-transform hover:scale-110"
           onClick={() => setOpen(!open)}
         >
-          <Icon className="size-7 text-white" />
-        </button>
+          <Icon className="size-7 text-white" /> 
+          <p className={`${cart?.length ? "" : "hidden"} ${open ? "hidden" : ""} absolute text-white right-0 top-[-10px] bg-[var(--first-color)] rounded-full px-[10px]`}>{cart?.length}</p>
+        </button> 
         <style>{`
         .menu-item {
           --x: 0px;

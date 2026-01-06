@@ -45,6 +45,7 @@ export default function Language() {
 
   useEffect(() => {
     setDefaultLanguageAction();
+    // eslint-disable-next-line
   }, []);
 
   return (
