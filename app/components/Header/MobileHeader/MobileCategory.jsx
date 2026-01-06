@@ -81,7 +81,7 @@ export default function MobileCategory() {
     },
   ];
   return (
-    <div className="w-screen h-[116px] overflow-x-auto flex gap-2 py-4">
+    <div className="w-screen h-[116px] overflow-x-auto flex gap-2 py-4 lg:hidden">
       {category?.map((cate) => (
         <div
           className="w-[100px]! h-full border-1 rounded-[10px] grid place-items-center flex-shrink-0"
