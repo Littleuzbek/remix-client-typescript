@@ -77,7 +77,7 @@ export default function ItemMobile({ product }: { product: CartItem }) {
       </div>
 
       <div className="w-full flex items-center justify-between border-b-3 border-[black] pb-[1rem] mb-[1rem]">
-        <div className="flex items-center justify-center w-[8rem] h-[3rem] border-1 border-[#a0a0a0] rounded-[5px]">
+        <div className="flex items-center justify-center w-[7rem] h-[3rem] border-1 border-[#a0a0a0] rounded-[5px]">
           <button
             className="w-[35%] bg-transparent border-none cursor-pointer grid place-items-center"
             style={
