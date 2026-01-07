@@ -66,7 +66,7 @@ export default function ShoppingDetails({
   };
 
   return (
-    <div className="w-full middle:w-[40rem]">
+    <div className="w-full lg:w-[40rem]">
       <div className="w-full">
         <p className="text-[1.5rem] my-[.5rem]">
           {productDetails?.name || productDetails?.title || "NO NAME PRODUCT"}
@@ -95,7 +95,7 @@ export default function ShoppingDetails({
         />
         <AmountHandler quantity={quantity} onAmountHandler={amountHandler} />
       </div>
-      <div className="hidden middle:block w-full my-[.5rem]">
+      <div className="hidden lg:block w-full my-[.5rem]">
         {/* <p>{translateText().price}:</p> */}
         <p className="text-[1rem] font-[500]">{translateText()?.productPriceLabel
           }:</p>
@@ -147,7 +147,7 @@ export default function ShoppingDetails({
       >
         {/* <p>{translateText().aboutPro}:</p> */}
         <p className="text-[1.3rem] mb-[.5rem]">{translateText()?.productDescription}:</p>
-        <p className="text-[1rem]">{productDetails?.specs}</p>
+        <p className="text-[1rem] text-justify">{productDetails?.specs}</p>
       </div>
 
       <div className="middle:hidden w-full h-[4rem] bg-[white] fixed bottom-[0] left-[0] flex justify-between items-center px-[.5rem] z-2">

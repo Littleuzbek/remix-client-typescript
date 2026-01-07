@@ -95,7 +95,7 @@ export default function Header() {
       </ul>
 
       <MobileSearch />
-      <MobileHeader />
+      {pathname?.includes("product") || <MobileHeader />}
 
       <SearchResult />
       <Notification />

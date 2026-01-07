@@ -1,5 +1,6 @@
 import Skeleton from "../Card/Skeleton";
 import Card from "../Card/Card";
+import MobileCategory from "../Header/MobileHeader/MobileCategory"
 import { useState } from "react";
 import { Product } from "~/utils";
 import { translateText } from "../Extra/Translation";
@@ -16,6 +17,9 @@ export default function Collection({ all, scroll, section }: CollectionProps) {
 
   return (
     <>
+      <MobileCategory />
+
+
       <h2 className="my-[1rem] text-[1.5rem] lg:text-[2rem]">{section || ""}</h2>
       <div className="w-full grid grid-cols-2 lg:grid-cols-5 gap-[1rem] pb-[1rem]">
         {all ? (

@@ -42,7 +42,7 @@ export default function Product({
         className="w-full bg-transparent border-none hidden middle:block"
         onClick={() => window?.history?.state.idx > 0 ? navigate(-1) : navigate("/")}
       >
-        <h2 className="w-fit mt-[2rem] mx-auto mb-0 cursor-pointer text-[1.5rem]">
+        <h2 className="w-fit mt-[2rem] mx-auto mb-0 cursor-pointer text-[1.5rem] grid place-items-center">
             <IoMdArrowRoundBack /> {translateText()?.productBackButton}
         </h2>
       </button>

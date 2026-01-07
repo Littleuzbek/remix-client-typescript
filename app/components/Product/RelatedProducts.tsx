@@ -8,7 +8,7 @@ interface RelatedProps {
 
 export default function RelatedProducts({ relatedProducts }: RelatedProps) {
   return (
-    <div className="w-[90%] mx-auto">
+    <div className="w-[90%] mx-auto overflow-x-hidden">
       <Collection
         all={relatedProducts || []}
         section={translateText()?.productRelatedTitle}
