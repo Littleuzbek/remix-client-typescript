@@ -103,7 +103,7 @@ export default function MobileCategory() {
   [&::-webkit-scrollbar-thumb]:rounded-full`
 
   return (
-    <div className={`w-screen h-[120px] overflow-x-auto flex gap-2 py-4 lg:hidden` + scrollStyle}>
+    <div className={`w-screen h-[120px] overflow-x-auto flex gap-2 py-4 lg:hidden ` + scrollStyle}>
       {category?.map((cate) => (
         <Link to={cate.link}
           className="w-[120px]! h-full border-1 rounded-[10px] grid place-items-center flex-shrink-0"

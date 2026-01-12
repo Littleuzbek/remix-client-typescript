@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "@remix-run/react";
+import { signOut } from "firebase/auth";
 import {
   ArrowLeftToLine,
   BadgeQuestionMark,
@@ -20,7 +21,15 @@ type langArray = {
   text: string;
 };
 
-export default function MobileUser({ onNavigate, currLangVal, onSetDrop }: { currLangVal: langArray | null, onNavigate: () => void, onSetDrop: () => void }) {
+export default function MobileUser({
+  onNavigate,
+  currLangVal,
+  onSetDrop,
+}: {
+  currLangVal: langArray | null;
+  onNavigate: () => void;
+  onSetDrop: () => void;
+}) {
   const userInfo = useSelector(
     (state: RootState) => state.cart.user
   ) as UserData | null;
@@ -56,13 +65,15 @@ export default function MobileUser({ onNavigate, currLangVal, onSetDrop }: { cur
       label: translateText()?.userControlSupport,
       navigation: `/user/${auth?.currentUser?.uid}/support`,
     },
-  ];  
+  ];
 
   return (
     <div className="flex flex-col fixed z-3 top-[0] left-[0] right-[0] bottom-[0] bg-[white]">
       <div className="w-full h-fit py-[10px] flex flex-col items-center justify-center">
         <img src={picture || ""} alt="" className="w-[13rem] h-[13rem]" />
-        <h1 className="max-w-[90%] text-[var(--first-color)] text-2xl font-bold">{userInfo?.name || "..."}</h1>
+        <h1 className="max-w-[90%] text-[var(--first-color)] text-2xl font-bold">
+          {userInfo?.name || "..."}
+        </h1>
       </div>
 
       <div className="grid grid-cols-2 gap-[5px]">
@@ -81,7 +92,10 @@ export default function MobileUser({ onNavigate, currLangVal, onSetDrop }: { cur
             {key.label}
           </button>
         ))}
-        <button className="h-[6rem] flex flex-col items-center justify-center gap-[5px] text-[18px] border-none bg-transparent text-[black]" onClick={()=> onSetDrop()}>
+        <button
+          className="h-[6rem] flex flex-col items-center justify-center gap-[5px] text-[18px] border-none bg-transparent text-[black]"
+          onClick={() => onSetDrop()}
+        >
           <img
             src={currLangVal?.pic || globe}
             alt=""
@@ -89,7 +103,14 @@ export default function MobileUser({ onNavigate, currLangVal, onSetDrop }: { cur
           />
           {currLangVal?.text}
         </button>
-        <button className="h-[6rem] flex flex-col items-center justify-center gap-[5px] text-[18px] border-none bg-transparent text-[black]">
+        <button
+          className="h-[6rem] flex flex-col items-center justify-center gap-[5px] text-[18px] border-none bg-transparent text-[black]"
+          onClick={() => {
+            signOut(auth);
+            onNavigate();
+            window.location.reload()
+          }}
+        >
           <ArrowLeftToLine /> {translateText()?.userControlExit}
         </button>
         <button

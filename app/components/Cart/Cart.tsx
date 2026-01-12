@@ -48,7 +48,10 @@ export default function Cart() {
       const idToken = await verifyUser();
       const formData = new FormData(target);
 
-      if (cart.length === 0) return;
+      if (cart.length === 0) {
+        dispatch(cartAction.setClearCart());
+        return;
+      }
 
       formData.append("idToken", idToken || "");
       formData.append("items", JSON.stringify(cart));
@@ -106,9 +109,11 @@ export default function Cart() {
         // Request completed
         if (api.status === 200) {
           // setAnim(translateText().sentSeccessfully);
+          return;
         } else {
           // setAnim("error");
           // botErrorHandler(newMessage);
+          return;
         }
       }
     };
@@ -117,7 +122,7 @@ export default function Cart() {
     setLoader({ ssr: false, client: false });
   };
 
-  useEffect(() => {7
+  useEffect(() => {
     if (loader?.ssr && fetcher?.data) {
       setLoader({ ssr: false, client: false });
     }
@@ -125,7 +130,9 @@ export default function Cart() {
     if (loader?.client) {
       setLoader({ ssr: false, client: false });
     }
-  }, [fetcher?.data, loader]);
+
+    // eslint-disable-next-line
+  }, [fetcher?.data]);
 
   return (
     <>
@@ -134,12 +141,12 @@ export default function Cart() {
           {cart.length === 0 ? (
             <NoItem />
           ) : (
-            <div className="w-[95%] middle:w-[90%] mt-[1rem] mx-auto">
-              <h2 className="text-[1.5rem] text-center middle:text-start middle:text-[2rem] mb-[1rem] middle:mb-[.5rem]">
+            <div className="w-[95%] lg:w-[90%] mt-[1rem] mx-auto relative z-3">
+              <h2 className="text-[1.5rem] text-center lg:text-start lg:text-[2rem] mb-[1rem] lg:mb-[.5rem]">
                  {translateText()?.cartLabel(cart.length)}
               </h2>
-              <div className="flex justify-between flex-col middle:flex-row mb-[1rem]">
-                <div className="w-[70%] h-fit rounded-[10px] border-3 border-[rgba(0,0,0,0.2)] hidden middle:block">
+              <div className="flex justify-between flex-col lg:flex-row mb-[1rem]">
+                <div className="w-[70%] h-fit rounded-[10px] border-3 border-[rgba(0,0,0,0.2)] hidden lg:block">
                   <div className="w-full h-[3rem] border-b-3 border-[rgba(0,0,0,0.2)] px-[1rem] flex justify-between items-center">
                     <h3>{translateText()?.cartOrdersLabel}</h3>
                   </div>
@@ -148,7 +155,7 @@ export default function Cart() {
                   ))}
                 </div>
 
-                <div className="w-full flex flex-wrap middle:hidden">
+                <div className="w-full flex flex-wrap lg:hidden">
                   {cart?.map((item: CartItem) => (
                     <ItemMobile product={item} key={item.cartItemId} />
                   ))}
@@ -166,7 +173,7 @@ export default function Cart() {
         </>
       )}
 
-      {loader && <p className="text-center">Loading...</p>}
+      {(loader.ssr || loader.client) &&  <p className="text-center">Loading...</p>}
     </>
   );
 }

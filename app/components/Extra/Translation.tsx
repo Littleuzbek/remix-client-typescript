@@ -95,6 +95,7 @@ const uzbekLang = {
     cartItemSeller: "shop",
     cartItemColorLabel: "Rang",
     cartItemSizLabel: "O'lcham",
+    cartItemUnit: "birlik",
     
     cartTotalLabel: "Buyurtmangiz",
     cartTotalProductsPriceLabel: "Mahsulotlaringiz",
@@ -222,7 +223,7 @@ const russianLang = {
     cartItemSeller: "магазин",
     cartItemColorLabel: "Цвет",
     cartItemSizLabel: "Размер",
-    
+    cartItemUnit: "единица ",
 
     cartTotalLabel: "Ваш заказ",
     cartTotalProductsPriceLabel: "Товары",
@@ -350,6 +351,7 @@ const koreanLang = {
     cartItemSeller: "쇼핑",
     cartItemColorLabel: "색상",
     cartItemSizLabel: "사이즈",
+    cartItemUnit: "단위",
     
     cartTotalLabel: "주문 내역",
     cartTotalProductsPriceLabel: "상품",

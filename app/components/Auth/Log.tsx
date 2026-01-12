@@ -51,7 +51,7 @@ export default function Login() {
 
   return (
     <form
-      className={`login-form w-[25rem] rounded-[10px] border-3 border-[var(--second-color)] py-[1rem] flex flex-col gap-[1rem] items-center text-[black] relative hover:text-[black] hover:${loader ?  "cursor-progress" : "cursor-default"} `}
+      className={`login-form w-full lg:w-[25rem] rounded-[10px] border-3 border-[var(--second-color)] py-[1rem] flex flex-col gap-[1rem] items-center text-[black] relative hover:text-[black] hover:${loader ?  "cursor-progress" : "cursor-default"} `}
       onSubmit={(e: React.FormEvent<HTMLFormElement>) => {
         loader ? e.preventDefault() : 
         e.preventDefault();

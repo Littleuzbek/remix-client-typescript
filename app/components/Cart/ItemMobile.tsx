@@ -4,6 +4,7 @@ import { FaMinus, FaPlus } from "react-icons/fa";
 import { cartAction } from "../../store/CartSlice";
 import { PriceFormatter } from "../Extra/Extra";
 import { CartItem } from "~/utils";
+import { translateText } from "../Extra/Translation";
 
 export default function ItemMobile({ product }: { product: CartItem }) {
   const dispatch = useDispatch();
@@ -55,24 +56,24 @@ export default function ItemMobile({ product }: { product: CartItem }) {
         </p>
         <div className="w-full flex justify-evenly flex-col my-[.5rem] ml-[.5rem]">
           <span className="flex gap-[.4rem] text-[#a8a8a8]">
-            Sotuvchi: <p className="text-[black]">EXKO shop</p>
+            {translateText()?.cartItemSellerLabel}: <p className="text-[black]">EXKO {translateText()?.cartItemSeller}</p>
           </span>
           {product?.color && (
             <span className="flex gap-[.4rem] text-[#a8a8a8]">
-              Rang: <p className="text-[black]">{product?.color}</p>
+              {translateText()?.cartItemColorLabel}: <p className="text-[black]">{product?.color}</p>
             </span>
           )}
           {product?.size && (
             <span className="flex gap-[.4rem] text-[#a8a8a8]">
-              O&apos;lcham: <p className="text-[black]">{product?.size}</p>
+              {translateText()?.cartItemSizLabel}: <p className="text-[black]">{product?.size}</p>
             </span>
           )}
         </div>
         <div className="w-full my-[.5rem] mr-[.5rem] flex justify-evenly flex-col items-end pr-[4%]">
           <p className="text-[1.2rem]">
-            {PriceFormatter(product?.discount * product?.quantity)} so&apos;m
+            {PriceFormatter(product?.discount * product?.quantity)} {translateText()?.orderPrice_currency}
           </p>
-          <s>{PriceFormatter(product?.price * product?.quantity)} so&apos;m</s>
+          <s>{PriceFormatter(product?.price * product?.quantity)} {translateText()?.orderPrice_currency}</s>
         </div>
       </div>
 
@@ -101,12 +102,12 @@ export default function ItemMobile({ product }: { product: CartItem }) {
           </button>
         </div>
         <p className="text-[black] text-[.9rem]">
-          {PriceFormatter(product?.discount)} so&apos;m
+          {PriceFormatter(product?.discount)} {translateText()?.orderPrice_currency}
           {" / "}
-          birlik
+          {translateText()?.cartItemUnit}
         </p>
-        <button className="w-fit h-full bg-transparent border-none text-[1.2rem] text-[black] cursor-pointer flex items-center justify-center gap-[.2rem] duration-500" onClick={() => amountHandler("delete")}>
-          <BsTrash3Fill /> Yo&apos;q qilish
+        <button className="w-fit h-full bg-transparent border-none text-[1rem] lg:text-[1.2rem] text-[black] cursor-pointer flex items-center justify-center gap-[.2rem] duration-500" onClick={() => amountHandler("delete")}>
+          <BsTrash3Fill /> {translateText()?.cartItemDeleteBtn}
         </button>
       </div>
     </>

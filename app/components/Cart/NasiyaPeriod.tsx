@@ -21,10 +21,9 @@ export default function NasiyaPeriod({
 }: Props) {
   const [period, setPeriod] = useState(selectedPeriodVal);
   const periodOff = "border-[rgba(0,0,0,0.2)]";
-  const periodOn =
-    "border-[var(--first-color)] shadow-[0_0_10px_var(--first-color)]";
+  const periodOn = "border-[var(--first-color)] shadow-[0_0_10px_var(--first-color)]";
   return (
-    <div className="w-full h-full bg-[rgba(0,0,0,0.3)] fixed top-[0] left-[0] z-100 flex items-center justify-center">
+    <div className="w-full h-full bg-[rgba(0,0,0,0.3)] fixed top-[0] left-[0] z-9999 flex items-center justify-center">
       <div className="w-[95%] middle:w-[27rem] bg-[white] rounded-[10px] py-[1rem] px-[1.5rem] grid gap-[1rem] text-[19px]">
         <h2>{translateText()?.nasiyaLabel}</h2>
         <p>{translateText()?.nasiyaFirstPayment}</p>

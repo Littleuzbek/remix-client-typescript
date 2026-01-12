@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "@remix-run/react";
-// import { onAuthStateChanged } from "firebase/auth";
+import { onAuthStateChanged } from "firebase/auth";
 import {
   ArrowUp,
   Heart,
@@ -11,7 +11,7 @@ import {
   Home,
 } from "lucide-react";
 import MobileUser from "./MobileUser";
-// import { auth } from "~/firebase";
+import { auth } from "~/firebase";
 import MobileLanguage from "./MobileLanguage";
 import uzFlag from "../../../assets/lgUZ.webp";
 import ruFlag from "../../../assets/lgRU.png";
@@ -54,7 +54,7 @@ const MobileHeader = () => {
       label: "User",
       arc: "outer",
       func: () => {
-        setUserMenu(true);
+        handleNavigation();
       },
     },
   ];
@@ -74,21 +74,15 @@ const MobileHeader = () => {
     },
   ];
 
-  // const handleNavigation = (): void => {
-  //   const userData = sessionStorage.getItem("userData");
-  //   if (userData) {
-  //     setUserMenu(true);
-  //     return;
-  //   }
-
-  //   onAuthStateChanged(auth, async (user) => {
-  //     if (user) {
-  //       setUserMenu(true);
-  //     } else {
-  //       navigate("/authentication");
-  //     }
-  //   });
-  // };
+  const handleNavigation = (): void => {
+    onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        setUserMenu(true);
+      } else {
+        navigate("/authentication");
+      }
+    });
+  };
 
   useEffect(() => {
     if (!menuRef.current) return;
@@ -202,7 +196,7 @@ const MobileHeader = () => {
         })}
 
         <button
-          className="size-14 bg-[var(--first-color)] rounded-full grid place-items-center relative z-10 shadow-xl transition-transform hover:scale-110"
+          className="size-14 bg-[var(--first-color)] rounded-full grid place-items-center  shadow-xl transition-transform hover:scale-110"
           onClick={() => setOpen(!open)}
         >
           <Icon className="size-7 text-white" /> 
