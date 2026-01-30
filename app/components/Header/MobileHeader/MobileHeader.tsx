@@ -32,6 +32,7 @@ const MobileHeader = () => {
   const menuRef = useRef<HTMLDivElement>(null);
   const Icon = open ? X : Menu;
   const navigate = useNavigate();
+  // const dispatch = useDispatch();
   const cart = useSelector((state: RootState) => state.cart.cart);
 
   const menuItems = [
@@ -47,7 +48,14 @@ const MobileHeader = () => {
     { icon: ShoppingCart, label: "Cart", arc: "inner", navigation: "/cart" },
     { icon: Home, label: "Home", arc: "inner", navigation: "/" },
 
-    { icon: Heart, label: "Heart", arc: "outer", func: () => {setDrop(true)} },
+    {
+      icon: Heart,
+      label: "Heart",
+      arc: "outer",
+      func: () => {
+        setDrop(true);
+      },
+    },
     { icon: Heart, label: "Favorites", arc: "outer", navigation: "/favourite" },
     {
       icon: User,
@@ -59,7 +67,7 @@ const MobileHeader = () => {
     },
   ];
 
- const langArr = [
+  const langArr = [
     {
       pic: uzFlag,
       text: "UZ",
@@ -127,7 +135,7 @@ const MobileHeader = () => {
     });
   }, [open]);
 
- function setDefaultLanguageAction() {
+  function setDefaultLanguageAction() {
     const savedLanguage = localStorage?.getItem("exkoLang");
     if (savedLanguage === null) {
       localStorage.setItem("exkoLang", "UZ");
@@ -139,11 +147,11 @@ const MobileHeader = () => {
   }
 
   useEffect(() => {
-   setDefaultLanguageAction();
-   // eslint-disable-next-line
- }, []);
+    setDefaultLanguageAction();
+    // eslint-disable-next-line
+  }, []);
 
-    return (
+  return (
     <div className="lg:hidden">
       {open && (
         <button
@@ -180,28 +188,44 @@ const MobileHeader = () => {
               }}
             >
               {index === 3 ? (
-                <img src={currLang?.pic} alt="" className="size-6 text-white object-contain" />
+                <img
+                  src={currLang?.pic}
+                  alt=""
+                  className="size-6 text-white object-contain"
+                />
               ) : (
-                <div className="relative">
-                <div className={`${(item.label === "Cart" && cart?.length) ? 
-                  "text-bold text-white absolute top-[-15px] right-0 left-0" : "hidden"
-                }`}>{cart?.length}</div>
-                <ItemIcon
-                  className={`${isOuter ? "size-5" : "size-6"} text-white`}
-                  />
-                </div>
+                  <div className="relative">
+                    <div
+                      className={`${
+                        item.label === "Cart" && cart?.length
+                          ? "text-bold text-white absolute top-[-15px] right-0 left-0"
+                          : "hidden"
+                      }`}
+                    >
+                      {cart?.length}
+                    </div>
+                    <ItemIcon
+                      className={`${isOuter ? "size-5" : "size-6"} text-white`}
+                    />
+                  </div>
               )}
             </button>
           );
         })}
 
         <button
-          className="size-14 bg-[var(--first-color)] rounded-full grid place-items-center  shadow-xl transition-transform hover:scale-110"
+          className="size-14 bg-[var(--first-color)] rounded-full grid place-items-center  shadow-xl transition-transform"
           onClick={() => setOpen(!open)}
         >
-          <Icon className="size-7 text-white" /> 
-          <p className={`${cart?.length ? "" : "hidden"} ${open ? "hidden" : ""} absolute text-white right-0 top-[-10px] bg-[var(--first-color)] rounded-full px-[10px]`}>{cart?.length}</p>
-        </button> 
+          <Icon className="size-7 text-white" />
+          <p
+            className={`${cart?.length ? "" : "hidden"} ${
+              open ? "hidden" : ""
+            } absolute text-white right-0 top-[-10px] bg-[var(--first-color)] rounded-full px-[10px]`}
+          >
+            {cart?.length}
+          </p>
+        </button>
         <style>{`
         .menu-item {
           --x: 0px;
@@ -210,9 +234,21 @@ const MobileHeader = () => {
       `}</style>
       </div>
 
-      {userMenu && <MobileUser currLangVal={currLang} onSetDrop={()=> setDrop(true)} onNavigate={() => setUserMenu(false)} />}
-        
-      {drop && <MobileLanguage onCurrLang={setCurrLang} onSetDrop={() => setDrop(false)} currLangVal={currLang} />}
+      {userMenu && (
+        <MobileUser
+          currLangVal={currLang}
+          onSetDrop={() => setDrop(true)}
+          onNavigate={() => setUserMenu(false)}
+        />
+      )}
+
+      {drop && (
+        <MobileLanguage
+          onCurrLang={setCurrLang}
+          onSetDrop={() => setDrop(false)}
+          currLangVal={currLang}
+        />
+      )}
     </div>
   );
 };

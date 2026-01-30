@@ -141,7 +141,7 @@ export default function Cart() {
           {cart.length === 0 ? (
             <NoItem />
           ) : (
-            <div className="w-[95%] lg:w-[90%] mt-[1rem] mx-auto relative z-3">
+            <div className="w-[95%] lg:w-[90%] mt-[1rem] mx-auto relative z-1">
               <h2 className="text-[1.5rem] text-center lg:text-start lg:text-[2rem] mb-[1rem] lg:mb-[.5rem]">
                  {translateText()?.cartLabel(cart.length)}
               </h2>

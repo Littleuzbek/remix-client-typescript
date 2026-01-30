@@ -180,7 +180,7 @@ const CartSlice = createSlice({
     },
     setNoAuthBuy(state, action){
       state.noAuthBuy = action.payload
-    } 
+    },
   },
 });
 
