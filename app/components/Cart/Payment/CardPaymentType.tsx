@@ -1,3 +1,5 @@
+import { translateText } from "~/components/Extra/Translation";
+
 export default function CardPaymentType({
   totalDiscountVal,
   paymentMethodVal,
@@ -46,7 +48,7 @@ export default function CardPaymentType({
         inputMode="numeric"
         maxLength={19}
         minLength={19}
-        placeholder="Karta raqamingizni kiriting"
+        placeholder={translateText()?.cartPaymentCartNumber}
         name="cardNumber"
         required
         onChange={CardNumberFormatter}
@@ -60,7 +62,7 @@ export default function CardPaymentType({
           maxLength={5}
           minLength={5}
           name="cardExp"
-          placeholder="OY/YIL"
+          placeholder={translateText()?.cartPaymentCartPeriod}
           required
           onChange={(e) => {
             const value = e.target.value;

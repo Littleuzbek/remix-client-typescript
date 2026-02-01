@@ -106,6 +106,9 @@ const uzbekLang = {
     cartTotalSum: "Jami",
     cartTotalSaving: "Tejovingiz",
     cartNasiyaFirstPayment: `Muddatli to'lov (birinchi to'lov):`,
+    cartPaymentTitle: "Karta orqali to'lov",
+    cartPaymentCartNumber: "Karta raqamingizni kiriting",
+    cartPaymentCartPeriod: "OY/YIL",
     
     nasiyaLabel: "Muddatli to'lov",
     nasiyaMonth: "oy",
@@ -234,6 +237,9 @@ const russianLang = {
     cartTotalSum: "Итого",
     cartTotalSaving: "Экономия",
     cartNasiyaFirstPayment: "Рассрочка (первый платеж):",
+    cartPaymentTitle: "Оплата картой",
+    cartPaymentCartNumber: "Введите номер карты",
+    cartPaymentCartPeriod: "ММ/ГГ",
     
     nasiyaLabel: "Рассрочка",
     nasiyaMonth: "мес.",
@@ -362,6 +368,9 @@ const koreanLang = {
     cartTotalSum: "합계",
     cartTotalSaving: "절감액",
     cartNasiyaFirstPayment: "할부 결제 (첫 번째 납부금):",
+    cartPaymentTitle: "카드 결제",
+    cartPaymentCartNumber: "카드 번호를 입력하세요",
+    cartPaymentCartPeriod: "월/년",
     
     nasiyaLabel: "할부 결제",
     nasiyaMonth: "개월",

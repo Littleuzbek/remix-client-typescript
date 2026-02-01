@@ -7,6 +7,7 @@ import {
 } from "./PaymentSVG";
 import { useState } from "react";
 import CardPaymentType from "./CardPaymentType";
+import { translateText } from "~/components/Extra/Translation";
 
 interface paymentProps {
   totalDiscountVal: string;
@@ -21,7 +22,7 @@ export default function CardPayment({
   return (
     <div className="w-full h-full bg-[rgba(0,0,0,0.3)] fixed top-[0] left-[0] z-1000 flex items-center justify-center">
       <div className="w-[95%] middle:w-auto bg-[white] rounded-[10px] py-[1rem] px-[1.5rem] flex flex-col gap-[1rem] text-[1.5rem]">
-        <h3>Karta orqali to&apos;lov</h3>
+        <h3>{translateText()?.cartPaymentTitle}</h3>
         <div className="flex flex-col gap-[1rem]">
           <div className="w-full border-none grid grid-cols-2 middle:grid-cols-[12rem_12rem] items-center gap-[1rem] cursor-default select-none">
             <button
