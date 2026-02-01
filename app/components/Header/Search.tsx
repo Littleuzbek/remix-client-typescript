@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { X } from "lucide-react";
 import { IoSearch } from "react-icons/io5";
@@ -7,6 +7,7 @@ import { Product } from "~/utils";
 import { RootState } from "~/root";
 import { cartAction } from "~/store/CartSlice";
 import { translateText } from "../Extra/Translation";
+import { useLocation } from "@remix-run/react";
 
 export default function Search() {
   const products = useSelector((state: RootState) => state.cart.products) as
@@ -17,6 +18,7 @@ export default function Search() {
   ) as Product[];
   const [result, setResult] = useState<boolean>(false);
   const inpRef = useRef<HTMLInputElement | null>(null);
+  const location = useLocation();
   const dispatch = useDispatch();
 
   const searchEngine = (
@@ -47,6 +49,11 @@ export default function Search() {
       }
     }
   };
+
+  useEffect(()=>{
+      dispatch(cartAction.setResults([]));
+    // eslint-disable-next-line
+  },[location])
 
   return (
     <div className="w-full lg:w-auto h-[2.5rem] flex items-center relative bg-white">

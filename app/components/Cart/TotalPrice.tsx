@@ -164,9 +164,9 @@ export default function TotalPrice({
       {nasiya && (
         <NasiyaPeriod
           totalDiscountVal={PriceFormatter(totalDiscountVal)}
-          on3={PriceFormatter(Math.round(totalDiscountVal / 3))}
-          on6={PriceFormatter(Math.round(totalDiscountVal / 6))}
-          on12={PriceFormatter(Math.round(totalDiscountVal / 12))}
+          on3={PriceFormatter(Math.round((totalDiscountVal / 3) * 1.15))}
+          on6={PriceFormatter(Math.round((totalDiscountVal / 6) * 1.15))}
+          on12={PriceFormatter(Math.round(((totalDiscountVal / 12) * 1.15)))}
           selectedPeriodVal={nasiyaPeriod}
           onSetNasiyaPeriod={nasiyaPeriodHandler}
         />
