@@ -26,9 +26,9 @@ export default function NasiyaIndicators({ order }: {order: OrderProps}) {
         >
           <p className="bg-[var(--first-color)] text-[white] py-[3px] px-[10px] rounded-[10px]">{translateText()?.orderNasiyaLabel}:</p>{" "}
           {order?.nasiyaCondition
-            ? "To'liq to'langan"
+            ? translateText()?.orderCondition_paid
             : order?.nasiyaCondition !== null
-            ? "Rad etilgan"
+            ? translateText()?.orderCondition_canceled
             : translateText()?.orderShowNasiyaBtn}{" "}
           <FaArrowDown
           className=""

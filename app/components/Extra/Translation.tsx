@@ -70,6 +70,7 @@ const uzbekLang = {
     orderCondition_canceled: "Rad etilgan",
     orderCondition_exko: "EXKO tomonidan rad etilgan",
     orderCondition_done: "Xaridor qabul qilgan",
+    orderCondition_paid: "To'liq to'langan",
     orderPrice_currency: "so'm",
 
     userNameLabel: "Ism",
@@ -201,6 +202,7 @@ const russianLang = {
     orderCondition_canceled: "Отклонено",
     orderCondition_exko: "Отклонено EXKO",
     orderCondition_done: "Принято покупателем",
+    orderCondition_paid: "Полностью оплачено",
     orderPrice_currency: "сум",
 
     userNameLabel: "Имя",
@@ -332,6 +334,7 @@ const koreanLang = {
     orderCondition_canceled: "거부됨",
     orderCondition_exko: "EXKO에서 거부됨",
     orderCondition_done: "구매자가 수락함", 
+    orderCondition_paid: "완전히 지불된",
     orderPrice_currency: "숨",
 
     userNameLabel: "이름",

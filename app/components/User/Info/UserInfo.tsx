@@ -107,7 +107,7 @@ export default function UserInfo() {
 
   return (
     <div className="h-fit p-[1rem] border-3 border-[var(--first-color)] rounded-[20px]">
-      <h2 className="text-center">{translateText()?.userControlInfo}</h2>
+      <h2 className="text-center lg:font-bold lg:text-xl">{translateText()?.userControlInfo}</h2>
 
       <form
         onSubmit={userDataChangeHandler}

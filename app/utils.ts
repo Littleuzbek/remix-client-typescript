@@ -708,26 +708,30 @@ export const cancelOrder = async (orderType: boolean, orderId: string, userId: s
         .doc(userId)
         .collection("orders")
         .doc(orderId);
+
         
       const globalOrderRef = adminDb
         .collection("exko")
         .doc("data")
         .collection("orders")
         .doc(orderId);
-      
+
       const updateData = {
-        confirmed: undefined,
+        confirmed: FieldValue.delete(),
         orderCondition: false,
         ...updateVal,
       };
+
       
       batch.update(userOrderRef, updateData);
       batch.update(globalOrderRef, updateData);
 
       await batch.commit();
     
+    
     return { success: true };
   } catch (err) {
+      console.log("batch error",err);
     return ReturnMessage(false, `${(err as Error)?.message || "Something went wrong. Please try again later!"}`);
   }
 };
