@@ -16,7 +16,7 @@ export default function User() {
     <div className="w-[95%] middle:w-[90%] my-[1rem] mx-auto">
       <div className="grid place-items-center">
         <img src={avatar1} alt="" className="w-[150px] h-[150px] rounded-[50%]" />
-        <h1 className="text-[var(--first-color)] lg:text-[2rem]! font-semibold">{userInfo && userInfo?.name || "..."}</h1>
+        <h1 className="text-[var(--first-color)] text-2xl font-semibold">{userInfo && userInfo?.name || "..."}</h1>
       </div>
 
       <div className="block middle:grid grid-cols-[20%_79%] gap-[1%] mt-[2rem]">
